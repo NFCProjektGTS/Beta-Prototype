@@ -3,9 +3,7 @@ package de.Beta.nfc_beta;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.provider.ContactsContract;
-import android.provider.Settings;
+
 
 /**
  * Created by Kern on 10.06.2014.
@@ -41,13 +39,16 @@ public class Dialog {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case 0:
+                                        iface.writeKontakt();
                                         break;
                                     case 1:
                                         iface.writeStummschalten();
                                         break;
                                     case 2:
+                                        iface.writePicture();
                                         break;
                                     case 3:
+                                        iface.writeSound();
                                         break;
                                 }
                             }

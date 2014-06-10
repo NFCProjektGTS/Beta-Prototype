@@ -32,16 +32,11 @@ import de.Beta.nfc_beta.R;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     public static NFCFramework framework;
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
-    InterfaceUI iface;
+    public static InterfaceUI iface;
+    public static DebugFragment df;
     @Override
     protected void onStop() {
         super.onStop();
@@ -65,6 +60,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        df = new DebugFragment();
         iface = new InterfaceUI(this);
 
         framework = new NFCFramework(this, iface);

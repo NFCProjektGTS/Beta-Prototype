@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
-
+import de.Beta.nfc_beta.DebugFragment;
 import de.Beta.nfc_beta.DebugFragment;
 
 /**
@@ -15,7 +15,7 @@ import de.Beta.nfc_beta.DebugFragment;
 public class InterfaceUI {
     Context mContext;
     NFCFramework framework= MainActivity.framework;
-
+    DebugFragment df = MainActivity.df;
 
     InterfaceUI(Context c) {
         mContext = c;
@@ -27,15 +27,15 @@ public class InterfaceUI {
     }
 
     public void printDebugInfo(String text) {
-        DebugFragment.addLine(0, text);
+        df.addLine(0, text);
     }
 
     public void printDebugWarn(String text) {
-        DebugFragment.addLine(1, text);
+        df.addLine(1, text);
     }
 
     public void printDebugError(String text) {
-        DebugFragment.addLine(2, text);
+        df.addLine(2, text);
     }
 
 
@@ -56,5 +56,10 @@ public class InterfaceUI {
         mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
     }
 
+    public void writePicture() {
+    }
+
+    public void writeSound() {
+    }
 }
 

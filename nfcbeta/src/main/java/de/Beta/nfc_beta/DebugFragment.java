@@ -4,8 +4,10 @@ package de.Beta.nfc_beta;
  * Created by Kern on 03.06.2014.
  */
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,17 +28,14 @@ import de.Beta.nfc_beta.R;
  */
 
 
-public class DebugFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+public class DebugFragment extends Fragment implements DebugChangeListener.Listener{
+
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static List<String> mDataSourceList = new ArrayList<String>();
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
+    private static ListView listView;
+    private static ArrayAdapter a;
+    private static DebugChangeListener dcl;
+
     public static DebugFragment newInstance(int sectionNumber) {
         DebugFragment fragment = new DebugFragment();
         Bundle args = new Bundle();
@@ -46,30 +45,28 @@ public class DebugFragment extends Fragment {
     }
 
     public DebugFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_debug, container, false);
         return rootView;
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        dcl = new DebugChangeListener();
+        dcl.registerListener(this);
 
-
-
-        ListView listView = (ListView) getActivity().findViewById(R.id.debuglist);
-        listView.setAdapter(new ArrayAdapter(getActivity(), R.layout.debuglist, mDataSourceList){
-
+        listView = (ListView) getActivity().findViewById(R.id.debuglist);
+        a= new ArrayAdapter(getActivity(), R.layout.debuglist, mDataSourceList){
             @Override
             public View getView(int position, View convertView,
                                 ViewGroup parent) {
                 View view =super.getView(position, convertView, parent);
-
-
-
                 TextView textView=(TextView) view.findViewById(android.R.id.text1);
                 textView.setTextSize(5,1.9f);
                 if(textView.getText().charAt(0)=='I'){
@@ -79,12 +76,10 @@ public class DebugFragment extends Fragment {
                 }else if(textView.getText().charAt(0)=='E'){
                     textView.setTextColor(new Color().parseColor("#FF3E2E"));
                 }
-
-
                 return view;
             }
-
-        });
+        };
+        listView.setAdapter(a);
 
 
 
@@ -95,7 +90,7 @@ public class DebugFragment extends Fragment {
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
     }
-    public static void addLine(int type, String line){
+    public  void addLine(int type, String line){
         switch (type){
             case 0:
                 mDataSourceList.add("I: "+line);
@@ -107,7 +102,17 @@ public class DebugFragment extends Fragment {
                 mDataSourceList.add("E: "+line);
                 break;
         }
+        if(a!=null){
+            dcl.changed();
+        }else {
+            System.out.println(line);
+        }
 
     }
 
+
+    @Override
+    public void onStateChange() {
+        a.notifyDataSetChanged();
+    }
 }
