@@ -114,5 +114,13 @@ public class DebugFragment extends Fragment implements DebugChangeListener.Liste
     @Override
     public void onStateChange() {
         a.notifyDataSetChanged();
+
+        listView.post(new Runnable() {
+           @Override
+           public void run() {
+                listView.setSelection(a.getCount() - 1);
+           }
+        });
+
     }
 }
