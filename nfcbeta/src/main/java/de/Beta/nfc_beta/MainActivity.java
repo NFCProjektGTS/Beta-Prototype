@@ -99,6 +99,8 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+
+
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:

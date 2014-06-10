@@ -1,7 +1,10 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import de.Beta.nfc_beta.DebugFragment;
@@ -31,6 +34,10 @@ public class InterfaceUI {
 
     public void printDebugError(String text) {
         DebugFragment.addLine(2, text);
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 }
 

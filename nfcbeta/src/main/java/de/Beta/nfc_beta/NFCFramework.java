@@ -87,7 +87,7 @@ public class NFCFramework {
             if (!mNfcAdapter.isEnabled()) {
                 wai.printDebugInfo("NFC is disabled");
                 wai.printDebugInfo("Opening NFC Activation Dialog");
-                //TODO wai.run("NFCDialog();");
+                new Dialog(caller,0);
                 if (mNfcAdapter.isEnabled()) {
                     return true;
                 }
@@ -95,7 +95,7 @@ public class NFCFramework {
             return true;
         } else {
            wai.showToast("NFC Hardware nicht gefunden");
-            //wai.printDebugError("NFC Hardware not detected");
+
         }
         return false;
     }
@@ -223,12 +223,12 @@ public class NFCFramework {
             if (ndef != null) {
                 ndef.connect();
                 if (!ndef.isWritable()) {
-                    wai.printDebugInfo("Tag is read-only.");
+                    wai.printDebugWarn("Tag is read-only.");
                     disableWrite();
                     return OnTagWriteListener.WRITE_ERROR_READ_ONLY;
                 }
                 if (ndef.getMaxSize() < size) {
-                    wai.printDebugInfo("Tag capacity is " + ndef.getMaxSize() + " bytes, message is " +
+                    wai.printDebugWarn("Tag capacity is " + ndef.getMaxSize() + " bytes, message is " +
                             size + " bytes.");
                     disableWrite();
                     return OnTagWriteListener.WRITE_ERROR_CAPACITY;
@@ -256,7 +256,7 @@ public class NFCFramework {
             }
         } catch (Exception e) {
             disableWrite();
-            wai.printDebugInfo("Failed to write tag: " + e);
+            wai.printDebugError("Failed to write tag: " + e);
         }
         disableWrite();
         return OnTagWriteListener.WRITE_ERROR_IO_EXCEPTION;
