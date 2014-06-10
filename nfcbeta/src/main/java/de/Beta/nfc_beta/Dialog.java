@@ -3,12 +3,18 @@ package de.Beta.nfc_beta;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.provider.ContactsContract;
+import android.provider.Settings;
 
 /**
  * Created by Kern on 10.06.2014.
  */
+
 public class Dialog {
-    Dialog(Context mContext,int id) {
+    static InterfaceUI iface;
+    Dialog(final Context mContext,int id) {
+        iface = new InterfaceUI(mContext);
         switch (id) {
             case 0:
                 new AlertDialog.Builder(mContext)
@@ -16,11 +22,13 @@ public class Dialog {
                         .setMessage(R.string.dialog_nfc)
                         .setPositiveButton(R.string.dialog_nfc_on, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                iface.activateNFC();
                             }
                         })
                         .setNegativeButton(R.string.dialog_nfc_off, new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int which) {
+                                iface.printDebugWarn("NFC wurde nicht Aktiviert");
                             }
                         })
                         .setIcon(android.R.drawable.ic_notification_clear_all)
@@ -31,13 +39,26 @@ public class Dialog {
                         .setTitle(R.string.dialog_write)
                         .setItems(R.array.dialog_write_opts, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
+                                switch (which){
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        iface.writeStummschalten();
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                }
                             }
                         })
                         .setIcon(android.R.drawable.ic_menu_edit)
                         .show();
                 break;
         }
+
     }
+
+
+
 }

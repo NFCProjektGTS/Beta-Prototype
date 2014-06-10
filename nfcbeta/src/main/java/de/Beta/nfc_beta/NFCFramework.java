@@ -85,8 +85,7 @@ public class NFCFramework {
     public boolean checkNFC() {
         if (mNfcAdapter != null) {
             if (!mNfcAdapter.isEnabled()) {
-                wai.printDebugInfo("NFC is disabled");
-                wai.printDebugInfo("Opening NFC Activation Dialog");
+                wai.printDebugWarn("NFC is disabled");
                 new Dialog(caller,0);
                 if (mNfcAdapter.isEnabled()) {
                     return true;

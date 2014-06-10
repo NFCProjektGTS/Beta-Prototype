@@ -1,10 +1,10 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v4.app.FragmentManager;
+import android.content.Intent;
+import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import de.Beta.nfc_beta.DebugFragment;
@@ -14,6 +14,8 @@ import de.Beta.nfc_beta.DebugFragment;
  */
 public class InterfaceUI {
     Context mContext;
+    NFCFramework framework= MainActivity.framework;
+
 
     InterfaceUI(Context c) {
         mContext = c;
@@ -21,7 +23,7 @@ public class InterfaceUI {
 
 
     void showToast(String text) {
-        Toast.makeText(mContext,text,Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext,text, Toast.LENGTH_LONG).show();
     }
 
     public void printDebugInfo(String text) {
@@ -36,8 +38,23 @@ public class InterfaceUI {
         DebugFragment.addLine(2, text);
     }
 
-    public Context getContext() {
-        return mContext;
+
+
+    public void writeStummschalten() {
+        framework.setPayload(Operations.OPC_SILENT);
+        framework.createWriteNdef(NdefCreator.muteMessage());
+        framework.enableWrite();
+        printDebugInfo("Schreibe Stummschalten");
     }
+    public  void writeKontakt() {
+       // mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
+
+        printDebugInfo("Schreibe Kontakt");
+    }
+
+    public void activateNFC() {
+        mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
+    }
+
 }
 
