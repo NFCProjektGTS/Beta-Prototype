@@ -2,6 +2,7 @@ package de.Beta.nfc_beta;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
 
 import de.Beta.nfc_beta.DebugFragment;
 
@@ -16,8 +17,8 @@ public class InterfaceUI {
     }
 
 
-    void showToast() {
-
+    void showToast(String text) {
+        Toast.makeText(mContext,text,Toast.LENGTH_LONG).show();
     }
 
     public void printDebugInfo(String text) {

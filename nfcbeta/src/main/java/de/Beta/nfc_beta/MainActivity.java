@@ -1,6 +1,11 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,6 +22,9 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.FileInputStream;
 
 import de.Beta.nfc_beta.R;
 
@@ -28,7 +36,7 @@ public class MainActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
+    public static NFCFramework framework;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -58,6 +66,11 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         iface = new InterfaceUI(this);
+
+        framework = new NFCFramework(this, iface);
+        //TODO framework.installService(); ??
+
+
     }
 
     @Override
@@ -75,9 +88,6 @@ public class MainActivity extends ActionBarActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, DebugFragment.newInstance(position + 1))
                         .commit();
-               iface.printDebugInfo("show Debug fragment");
-                iface.printDebugError("show Debug fragment so i have to make it very long so the sky dosnt fall on my head when i sleep and even longer so its dosent fall when i eat");
-                iface.printDebugWarn("show Debug fragment");
                 break;
             case 3:
                 fragmentManager.beginTransaction()
@@ -134,6 +144,65 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (framework != null) {
+            if (framework.checkNFC()) {
+                framework.uninstallService();
+            }
+        }
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (framework != null) {
+            framework.resolveIntent(getIntent());
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setIntent(new Intent());
+        if (framework != null) {
+            if (framework.checkNFC()) {
+                framework.installService();
+            }
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Uri contactData = data.getData();
+
+                Cursor cursor = managedQuery(contactData, null, null, null, null);
+                cursor.moveToFirst();
+                String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+                Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
+                AssetFileDescriptor fd;
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                try {
+                    fd = getContentResolver().openAssetFileDescriptor(uri, "r");
+                    FileInputStream fis = fd.createInputStream();
+                    byte[] buf = new byte[(int) fd.getDeclaredLength()];
+                    fis.read(buf);
+                    framework.setPayload(new String(buf));
+                    Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        if (!framework.getPayload().equals("")) {
+            framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
+            framework.enableWrite();
+        }
     }
 
 }
