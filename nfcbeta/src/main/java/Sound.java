@@ -13,7 +13,7 @@ public class Sound {
     // Methode zum Sound abspielen, String path ist der Dateipfad
     public void soundAbspielen(String path) {
         int soundID = mSoundPool.load(path, 1);
-        int streamID = mSoundPool.play(soundID, 1.0, 1.0, 1, 0, 1);
+        int streamID = mSoundPool.play(soundID, 1, 1, 1, 0, 1);
     }
     // Methode zum Sound pausieren
     public void soundPausieren() {
