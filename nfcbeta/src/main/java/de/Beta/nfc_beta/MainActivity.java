@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity
         iface = new InterfaceUI(this);
 
         framework = new NFCFramework(this, iface);
-        framework.installService(); // yep
+        //TODO BUGT RUM! framework.installService(); // yep
 
 
     }
@@ -78,8 +78,38 @@ public class MainActivity extends ActionBarActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, InfoFragment.newInstance(position + 1))
                         .commit();
-
                 break;
+            case 4:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wContactFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 5:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wMuteFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 6:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wPictureFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 7:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wSoundFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 8:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wTextFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 9:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wURLFragment.newInstance(position + 1))
+                        .commit();
+                break;
+
         }
 
     }
@@ -96,6 +126,24 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_section6);
+                break;
+            case 7:
+                mTitle = getString(R.string.title_section7);
+                break;
+            case 8:
+                mTitle = getString(R.string.title_section8);
+                break;
+            case 9:
+                mTitle = getString(R.string.title_section9);
                 break;
         }
     }
@@ -155,7 +203,7 @@ public class MainActivity extends ActionBarActivity
         setIntent(new Intent());
         if (framework != null) {
             if (framework.checkNFC()) {
-                framework.installService();
+                //TODO BUGT RUM! framework.installService();
             }
         }
     }

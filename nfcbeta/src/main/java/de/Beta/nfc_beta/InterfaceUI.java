@@ -20,7 +20,7 @@ public class InterfaceUI {
 
 
     void showToast(String text) {
-        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
     }
 
     public void printDebugInfo(String text) {
@@ -37,9 +37,9 @@ public class InterfaceUI {
 
 
     public void writeStummschalten() {
-        framework.setPayload(OpCodes.OPC_SILENT);
-        framework.createWriteNdef(NdefCreator.muteMessage());
-        framework.enableWrite();
+        //framework.setPayload(OpCodes.OPC_SILENT);
+        //framework.createWriteNdef(NdefCreator.muteMessage());
+        //framework.enableWrite();
         printDebugInfo("Schreibe Stummschalten");
     }
 
