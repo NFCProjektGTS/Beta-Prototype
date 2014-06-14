@@ -6,16 +6,11 @@
     android:weightSum="1">
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_wtext"
-        android:layout_weight="0.20" />
-
     <Button
-        android:layout_width="116dp"
-        android:layout_height="59dp"
-        android:text="Schreibe Text"
-        android:id="@+id/button_wtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schreibe Weg"
+        android:id="@+id/button_wWay"
         android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

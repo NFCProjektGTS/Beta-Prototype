@@ -9,38 +9,44 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import de.Beta.nfc_beta.R;
 
 
+/**
+ * Created by Kern on 02.06.2014.
+ */
 
 
-public  class wURLFragment extends Fragment implements View.OnClickListener{
-
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public  class wWayFragment extends Fragment {
+    /**
+     * The fragment argument representing the section number for this
+     * fragment.
+     */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
-    EditText wurlEditText;
 
-    public static wURLFragment newInstance(int sectionNumber) {
-        wURLFragment fragment = new wURLFragment();
+    /**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     */
+    public static wWayFragment newInstance(int sectionNumber) {
+        wWayFragment fragment = new wWayFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public wURLFragment() {
+    public wWayFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_wurl, container, false);
-        Button wurlButton =(Button) rootView.findViewById(R.id.button_wURL);
-        wurlEditText   = (EditText)rootView.findViewById(R.id.editText_wURL);
-        wurlButton.setOnClickListener(this);
+        View rootView = inflater.inflate(R.layout.fragment_wway, container, false);
         return rootView;
     }
 
@@ -49,16 +55,6 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
-    }
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case  R.id.button_wURL: {
-                iface = new InterfaceUI(getActivity());
-                iface.writeText(wurlEditText.getText().toString());
-                break;
-            }
-        }
     }
 }
 

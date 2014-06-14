@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -16,6 +18,7 @@ public class InterfaceUI {
 
     InterfaceUI(Activity c) {
         mContext = c;
+
     }
 
 
@@ -66,5 +69,14 @@ public class InterfaceUI {
         //framework.enableWrite();
     }
 
+
+    public void writeText(String s) {
+        printDebugInfo("Schreibe Text: "+s);
+        //TODO NFC ZEUG
+    }
+    public void writeURL(String s) {
+        printDebugInfo("Schreibe URL: "+s);
+        //TODO NFC ZEUG
+    }
 }
 

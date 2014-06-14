@@ -12,13 +12,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+   implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     public static NFCFramework framework;
     public static InterfaceUI iface;
@@ -51,8 +53,9 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         df = new DebugFragment();
         iface = new InterfaceUI(this);
-
         framework = new NFCFramework(this, iface);
+
+
         //framework.installService(); //TODO BUGT RUM!
 
 
@@ -239,5 +242,6 @@ public class MainActivity extends ActionBarActivity
             framework.enableWrite();
         }
     }
+
 
 }
