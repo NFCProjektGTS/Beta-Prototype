@@ -150,9 +150,20 @@ public class NdefCreator {
 
     public static NdefMessage SoundMessage(String name) { // Soundname
         try {
-            byte[] soundname = name.toLowerCase().getBytes(); //immer lowercase
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND.getBytes(), new byte[0], soundname); //
+                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND.getBytes(), new byte[0], name.toLowerCase().getBytes()); //
+            NdefRecord[] records = new NdefRecord[]{record};
+            return new NdefMessage(records);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmptyNdef();
+    }
+
+    public static NdefMessage ImageMessage(String name) {
+        try {
+            NdefRecord record = new NdefRecord(
+                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_IMAGE.getBytes(), new byte[0], name.toLowerCase().getBytes()); //
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
         } catch (Exception e) {
