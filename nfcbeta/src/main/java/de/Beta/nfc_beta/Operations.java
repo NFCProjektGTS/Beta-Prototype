@@ -6,4 +6,5 @@ package de.Beta.nfc_beta;
 public interface Operations {
     public static final String OPC_SILENT = "exec_mutephone";
     public static final String OPC_CONTACT = "exec_addcontact";
+    public static final String OPC_SOUND_01 = "exec_playsound_01";
 }

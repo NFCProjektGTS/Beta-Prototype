@@ -60,6 +60,9 @@ public class InterfaceUI {
     }
 
     public void writeSound() {
+        framework.setPayload(Operations.OPC_SOUND_01);
+        framework.createWriteNdef(NdefCreator.Sound01Message());
+        framework.enableWrite();
     }
 }
 
