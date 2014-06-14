@@ -18,6 +18,7 @@ import android.os.Parcelable;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 /**
  * Created by Noli on 27.05.2014.
@@ -293,33 +294,27 @@ public class NFCFramework {
     public void operate(NdefMessage[] msg) {
         for (NdefMessage ms : msg) {
             for (NdefRecord rec : ms.getRecords()) {
-                byte[] type = rec.getType();
-                String contenttype = new String(type);
-
-                // if statements in case no switch-case possible with Strings; usually impleneted in JDK7
-
-                if (contenttype.equals(Operations.OPC_CONTACT)) {
+                switch (new BigInteger(rec.getType()).intValue()) {
+                    case 1001:
                     //automatically handled in android os
-                } else if (contenttype.equals(Operations.OPC_SILENT)) {
-                    Utils.toggleSilent(caller);
-                    Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
-                } else if (contenttype.equals(Operations.OPC_SOUND)) {
-                    //TODO show sound Fragmet
-                    //TODO play sound!
-
-
-                    Toast.makeText(caller, "Sound 01 Tag detected! Playing Sound 01!", Toast.LENGTH_SHORT).show();
-                }
-                /*switch (type){
-                    case Operations.OPC_CONTACT:
                         break;
-                    case Operations.OPC_SILENT:
+                    case 1002:
+                        Utils.toggleSilent(caller);
+                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1003:
+                        //TODO set ImageFragmet to foreground => load and display image
+                        break;
+                    case 1004:
+                        //TODO set SoundFragment to foreground => load and play sound
+                        break;
+                    case 1005:
+                        //placeholder
                         break;
                     default:
-                        wai.printDebugInfo("Could not resolve Tag-Operation");
+                        //
                         break;
-
-                }*/
+                }
             }
         }
     }

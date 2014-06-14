@@ -5,6 +5,7 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -137,9 +138,10 @@ public class NdefCreator {
 
     public static NdefMessage muteMessage() {
         try {
-
+            final BigInteger bi = BigInteger.valueOf(Operations.OPC_SILENT);
+            final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SILENT.getBytes(), new byte[0], new byte[0]);
+                    NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], new byte[0]);
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
         } catch (Exception e) {
@@ -150,8 +152,10 @@ public class NdefCreator {
 
     public static NdefMessage SoundMessage(String name) { // Soundname
         try {
+            final BigInteger bi = BigInteger.valueOf(Operations.OPC_SOUND);
+            final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND.getBytes(), new byte[0], name.toLowerCase().getBytes()); //
+                    NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], name.toLowerCase().getBytes()); //
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
         } catch (Exception e) {
@@ -162,8 +166,10 @@ public class NdefCreator {
 
     public static NdefMessage ImageMessage(String name) {
         try {
+            final BigInteger bi = BigInteger.valueOf(Operations.OPC_IMAGE);
+            final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_IMAGE.getBytes(), new byte[0], name.toLowerCase().getBytes()); //
+                    NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], name.toLowerCase().getBytes()); //
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
         } catch (Exception e) {
