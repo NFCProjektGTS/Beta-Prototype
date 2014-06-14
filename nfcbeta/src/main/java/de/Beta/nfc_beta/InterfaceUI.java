@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -72,6 +70,9 @@ public class InterfaceUI {
 
     public void writeText(String s) {
         printDebugInfo("Schreibe Text: "+s);
+        framework.setPayload(s);
+        framework.createWriteNdef(NdefCreator.fromText(s, "de_DE"));
+        framework.enableWrite();
         //TODO NFC ZEUG
     }
     public void writeURL(String s) {
