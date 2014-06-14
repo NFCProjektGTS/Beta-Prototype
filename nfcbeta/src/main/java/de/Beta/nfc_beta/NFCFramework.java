@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.nfc.TagLostException;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.Ndef;
@@ -86,14 +88,14 @@ public class NFCFramework {
         if (mNfcAdapter != null) {
             if (!mNfcAdapter.isEnabled()) {
                 wai.printDebugWarn("NFC is disabled");
-                new Dialog(caller,0);
+                new Dialog(caller, 0);
                 if (mNfcAdapter.isEnabled()) {
                     return true;
                 }
             }
             return true;
         } else {
-           wai.showToast("NFC Hardware nicht gefunden");
+            wai.showToast("NFC Hardware nicht gefunden");
 
         }
         return false;
@@ -206,8 +208,6 @@ public class NFCFramework {
                 this.wai.printDebugInfo("Message: " + msg.toString());
                 this.wai.printDebugInfo("Record: " + rec.toString());
                 this.wai.printDebugInfo("Content: " + content);
-                System.out.println("Content= " + content);
-                System.out.println("");
             }
         }
         //wai.printDebugInfo(msgs.toString());
@@ -215,7 +215,6 @@ public class NFCFramework {
     }
 
     private int writeTag(Tag tag, NdefMessage message) {
-        this.wai.printDebugInfo("We inside Magic <3");
         try {
             int size = message.toByteArray().length;
             Ndef ndef = Ndef.get(tag);
@@ -253,12 +252,19 @@ public class NFCFramework {
                     return OnTagWriteListener.WRITE_ERROR_BAD_FORMAT;
                 }
             }
-        } catch (Exception e) {
+        } catch (TagLostException e) {
             disableWrite();
-            wai.printDebugError("Failed to write tag: " + e);
+            wai.printDebugError("Failed to write. Tag out of range.");
+            return OnTagWriteListener.WRITE_ERROR_TAG_LOST;
+        } catch (IOException e) {
+            disableWrite();
+            wai.printDebugError("Failed to write. I/O Error");
+            return OnTagWriteListener.WRITE_ERROR_IO_EXCEPTION;
+        } catch (FormatException e) {
+            disableWrite();
+            wai.printDebugError("Failed to write. Tag unformatable!");
+            return OnTagWriteListener.WRITE_ERROR_BAD_FORMAT;
         }
-        disableWrite();
-        return OnTagWriteListener.WRITE_ERROR_IO_EXCEPTION;
     }
 
     public void enableWrite() {
@@ -279,6 +285,7 @@ public class NFCFramework {
             this.wTAG = null;
             this.mWriteNdef = null;
             this.WriteMode = false;
+            this.payload = "";
             Toast.makeText(caller, "Writemode disabled", Toast.LENGTH_LONG).show();
         }
     }
@@ -293,7 +300,7 @@ public class NFCFramework {
 
                 if (contenttype.equals(Operations.OPC_CONTACT)) {
                     //automatically handled in android os
-                }else if (contenttype.equals(Operations.OPC_SILENT)) {
+                } else if (contenttype.equals(Operations.OPC_SILENT)) {
                     Utils.toggleSilent(caller);
                     Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_LONG).show();
                 }

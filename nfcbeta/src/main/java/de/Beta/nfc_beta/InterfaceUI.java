@@ -1,23 +1,20 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
-import de.Beta.nfc_beta.DebugFragment;
-import de.Beta.nfc_beta.DebugFragment;
 
 /**
  * Created by Kern on 03.06.2014.
  */
 public class InterfaceUI {
-    Context mContext;
+    Activity mContext;
     NFCFramework framework= MainActivity.framework;
     DebugFragment df = MainActivity.df;
 
-    InterfaceUI(Context c) {
+    InterfaceUI(Activity c) {
         mContext = c;
     }
 
@@ -47,8 +44,7 @@ public class InterfaceUI {
         printDebugInfo("Schreibe Stummschalten");
     }
     public  void writeKontakt() {
-       // mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
-
+        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
         printDebugInfo("Schreibe Kontakt");
     }
 
@@ -57,9 +53,12 @@ public class InterfaceUI {
     }
 
     public void writePicture() {
+        //select image dialog
+
     }
 
     public void writeSound() {
+        //select sound dialog
     }
 }
 

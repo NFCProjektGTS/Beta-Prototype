@@ -9,6 +9,7 @@ public class OnTagWriteListener {
     public static final int WRITE_ERROR_CAPACITY = 2;
     public static final int WRITE_ERROR_BAD_FORMAT = 3;
     public static final int WRITE_ERROR_IO_EXCEPTION = 4;
+    public static final int WRITE_ERROR_TAG_LOST = 5;
 
     public static String onTagWrite(int status) {
         switch (status) {
@@ -22,6 +23,8 @@ public class OnTagWriteListener {
                 return "WRITE_ERROR_BAD_FORMAT";
             case 4:
                 return "WRITE_ERROR_IO_EXCEPTION";
+            case 5:
+                return "WRITE_ERROR_TAG_LOST";
         }
         return null;
     }

@@ -1,7 +1,7 @@
 package de.Beta.nfc_beta;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 
 
@@ -11,7 +11,8 @@ import android.content.DialogInterface;
 
 public class Dialog {
     static InterfaceUI iface;
-    Dialog(final Context mContext,int id) {
+
+    Dialog(final Activity mContext, int id) {
         iface = new InterfaceUI(mContext);
         switch (id) {
             case 0:
@@ -59,7 +60,4 @@ public class Dialog {
         }
 
     }
-
-
-
 }

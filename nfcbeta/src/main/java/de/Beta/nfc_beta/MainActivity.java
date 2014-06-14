@@ -1,42 +1,31 @@
 package de.Beta.nfc_beta;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.provider.ContactsContract;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
-
-import de.Beta.nfc_beta.R;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private NavigationDrawerFragment mNavigationDrawerFragment;
     public static NFCFramework framework;
-    private CharSequence mTitle;
     public static InterfaceUI iface;
     public static DebugFragment df;
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private CharSequence mTitle;
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -64,7 +53,7 @@ public class MainActivity extends ActionBarActivity
         iface = new InterfaceUI(this);
 
         framework = new NFCFramework(this, iface);
-        //TODO framework.installService(); ??
+        framework.installService(); // yep
 
 
     }
