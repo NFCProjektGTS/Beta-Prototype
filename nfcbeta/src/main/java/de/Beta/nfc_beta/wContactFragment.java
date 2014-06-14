@@ -6,29 +6,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import de.Beta.nfc_beta.R;
 
 
 /**
- * Created by Kern on 02.06.2014.
+ * Created by Kern on 14.06.2014.
  */
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
-public  class wContactFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
+public  class wContactFragment extends Fragment implements View.OnClickListener {
+
+
     private static final String ARG_SECTION_NUMBER = "section_number";
+    TextView TextViewContactName;
+    TextView TextViewContactPhone;
+    static InterfaceUI iface;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static wContactFragment newInstance(int sectionNumber) {
         wContactFragment fragment = new wContactFragment();
         Bundle args = new Bundle();
@@ -44,6 +41,12 @@ public  class wContactFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wcontact, container, false);
+        Button chooseContactButton =(Button) rootView.findViewById(R.id.button_wchoosecontact);
+        Button wContactButton =(Button) rootView.findViewById(R.id.button_wcontact);
+        TextViewContactName   = (TextView)rootView.findViewById(R.id.textView_ContactName);
+        TextViewContactPhone   = (TextView)rootView.findViewById(R.id.textView_ContactPhone);
+        chooseContactButton.setOnClickListener(this);
+        wContactButton.setOnClickListener(this);
         return rootView;
     }
 
@@ -52,6 +55,21 @@ public  class wContactFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public void onClick(View view) {
+        iface = new InterfaceUI(getActivity());
+        switch (view.getId()) {
+            case  R.id.button_wchoosecontact: {
+                iface.chooseContact();
+                break;
+            }
+            case R.id.button_wcontact:{
+                iface.writeKontakt();
+                break;
+            }
+        }
     }
 }
 

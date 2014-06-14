@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name:"
-        android:id="@+id/textView" />
+        android:id="@+id/textView_ContactName" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nummer:"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView_ContactPhone" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,6 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Schreibe Kontakt"
-        android:id="@+id/button2"
+        android:id="@+id/button_wcontact"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

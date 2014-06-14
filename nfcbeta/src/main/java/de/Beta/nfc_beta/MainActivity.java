@@ -229,9 +229,9 @@ public class MainActivity extends ActionBarActivity
                     byte[] buf = new byte[(int) fd.getDeclaredLength()];
                     fis.read(buf);
                     framework.setPayload(new String(buf));
-                    Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 

@@ -78,5 +78,9 @@ public class InterfaceUI {
         printDebugInfo("Schreibe URL: "+s);
         //TODO NFC ZEUG
     }
+
+    public void chooseContact() {
+       //TODO KP WIE MAN DAS MACHT mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
+    }
 }
 
