@@ -296,17 +296,21 @@ public class NFCFramework {
             for (NdefRecord rec : ms.getRecords()) {
                 switch (new BigInteger(rec.getType()).intValue()) {
                     case 1001:
-                    //automatically handled in android os
+                        Operations.toggleSilent(caller);
+                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1002:
-                        Utils.toggleSilent(caller);
-                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        //automatically handled in android os
                         break;
                     case 1003:
                         //TODO set ImageFragmet to foreground => load and display image
+                        Operations.initSound(caller);
+                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1004:
                         //TODO set SoundFragment to foreground => load and play sound
+                        Operations.initImage(caller);
+                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1005:
                         //placeholder

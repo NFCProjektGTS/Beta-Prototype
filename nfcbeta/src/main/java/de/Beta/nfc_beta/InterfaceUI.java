@@ -11,7 +11,7 @@ import android.widget.Toast;
  */
 public class InterfaceUI {
     Activity mContext;
-    NFCFramework framework= MainActivity.framework;
+    NFCFramework framework = MainActivity.framework;
     DebugFragment df = MainActivity.df;
 
     InterfaceUI(Activity c) {
@@ -20,7 +20,7 @@ public class InterfaceUI {
 
 
     void showToast(String text) {
-        Toast.makeText(mContext,text, Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
     }
 
     public void printDebugInfo(String text) {
@@ -36,14 +36,14 @@ public class InterfaceUI {
     }
 
 
-
     public void writeStummschalten() {
-        framework.setPayload(Operations.OPC_SILENT);
+        framework.setPayload(OpCodes.OPC_SILENT);
         framework.createWriteNdef(NdefCreator.muteMessage());
         framework.enableWrite();
         printDebugInfo("Schreibe Stummschalten");
     }
-    public  void writeKontakt() {
+
+    public void writeKontakt() {
         mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
         printDebugInfo("Schreibe Kontakt");
     }

@@ -138,7 +138,7 @@ public class NdefCreator {
 
     public static NdefMessage muteMessage() {
         try {
-            final BigInteger bi = BigInteger.valueOf(Operations.OPC_SILENT);
+            final BigInteger bi = BigInteger.valueOf(OpCodes.OPC_SILENT);
             final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
                     NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], new byte[0]);
@@ -152,7 +152,7 @@ public class NdefCreator {
 
     public static NdefMessage SoundMessage(String name) { // Soundname
         try {
-            final BigInteger bi = BigInteger.valueOf(Operations.OPC_SOUND);
+            final BigInteger bi = BigInteger.valueOf(OpCodes.OPC_SOUND);
             final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
                     NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], name.toLowerCase().getBytes()); //
@@ -166,7 +166,7 @@ public class NdefCreator {
 
     public static NdefMessage ImageMessage(String name) {
         try {
-            final BigInteger bi = BigInteger.valueOf(Operations.OPC_IMAGE);
+            final BigInteger bi = BigInteger.valueOf(OpCodes.OPC_IMAGE);
             final byte[] opc = bi.toByteArray();
             NdefRecord record = new NdefRecord(
                     NdefRecord.TNF_MIME_MEDIA, opc, new byte[0], name.toLowerCase().getBytes()); //
