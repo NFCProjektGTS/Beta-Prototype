@@ -1,13 +1,10 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
-import de.Beta.nfc_beta.DebugFragment;
-import de.Beta.nfc_beta.DebugFragment;
 
 /**
  * Created by Kern on 03.06.2014.
@@ -61,9 +58,12 @@ public class InterfaceUI {
     }
 
     public void writeSound() {
-        framework.setPayload(Operations.OPC_SOUND_01);
-        framework.createWriteNdef(NdefCreator.Sound01Message());
-        framework.enableWrite();
+        // first get soundd
+        // second create NdefMessage with sounddata
+        // third setPayload
+        //framework.setPayload(Operations.OPC_SOUND_01);
+        //framework.createWriteNdef(NdefCreator.Sound01Message());
+        //framework.enableWrite();
     }
 }
 

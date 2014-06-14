@@ -1,5 +1,7 @@
-import android.media.SoundPool;
+package de.Beta.nfc_beta;
+
 import android.media.AudioManager;
+import android.media.SoundPool;
 
 /**
  * Created by Clemens on 13.06.2014.
@@ -24,11 +26,12 @@ public class Sound {
         mSoundPool.resume(streamID);
     }
 
+    public int getStreamID() {
+        return (streamID);
+    }
+
     //setter getter Methoden für alle Variablen
     public void setStreamID(int streamID) {
         this.streamID = streamID;
-    }
-    public int getStreamID() {
-        return (streamID);
     }
 }

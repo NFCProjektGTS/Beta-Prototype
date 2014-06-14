@@ -147,12 +147,12 @@ public class NdefCreator {
         }
         return getEmptyNdef();
     }
-    public static NdefMessage Sound01Message() {
-        //TODO SWITCH CASE FÜR SOUND
-        try {
 
+    public static NdefMessage SoundMessage(String name) { // Soundname
+        try {
+            byte[] soundname = name.toLowerCase().getBytes(); //immer lowercase
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND_01.getBytes(), new byte[0], new byte[0]);
+                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND.getBytes(), new byte[0], soundname); //
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
         } catch (Exception e) {
@@ -160,7 +160,6 @@ public class NdefCreator {
         }
         return getEmptyNdef();
     }
-
 
 
 }
