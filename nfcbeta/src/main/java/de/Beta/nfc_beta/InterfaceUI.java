@@ -65,5 +65,6 @@ public class InterfaceUI {
         //framework.createWriteNdef(NdefCreator.Sound01Message());
         //framework.enableWrite();
     }
+
 }
 

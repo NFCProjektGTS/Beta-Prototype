@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity
         iface = new InterfaceUI(this);
 
         framework = new NFCFramework(this, iface);
-        //TODO BUGT RUM! framework.installService(); // yep
+        //framework.installService(); //TODO BUGT RUM!
 
 
     }
@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity
         setIntent(new Intent());
         if (framework != null) {
             if (framework.checkNFC()) {
-                //TODO BUGT RUM! framework.installService();
+                //framework.installService();//TODO BUGT RUM!
             }
         }
     }

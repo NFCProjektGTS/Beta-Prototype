@@ -4,10 +4,8 @@ package de.Beta.nfc_beta;
  * Created by Kern on 03.06.2014.
  */
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,8 +17,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.Beta.nfc_beta.R;
 
 
 /**

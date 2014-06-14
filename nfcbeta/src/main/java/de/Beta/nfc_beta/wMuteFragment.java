@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import de.Beta.nfc_beta.R;
 
@@ -45,6 +46,7 @@ public  class wMuteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wmute, container, false);
         return rootView;
+
     }
 
     @Override
@@ -52,7 +54,9 @@ public  class wMuteFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+
     }
+
 }
 
 
