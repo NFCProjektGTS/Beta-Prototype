@@ -162,7 +162,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1) { //TODO switch requestCode!!
             if (resultCode == RESULT_OK) {
                 Uri contactData = data.getData();
 

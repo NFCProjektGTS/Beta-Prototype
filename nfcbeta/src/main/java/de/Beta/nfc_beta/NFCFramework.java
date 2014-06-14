@@ -55,10 +55,6 @@ public class NFCFramework {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public String getPayload() {
         return payload;
     }
@@ -136,7 +132,7 @@ public class NFCFramework {
     }
 
 
-    public byte[] rawTagData(Parcelable parc) {
+    private byte[] rawTagData(Parcelable parc) {
         StringBuilder s = new StringBuilder();
         Tag tag = (Tag) parc;
         byte[] id = tag.getId();
@@ -191,7 +187,7 @@ public class NFCFramework {
         return s.toString().getBytes();
     } //Only reading
 
-    public NdefMessage[] RawNDEFContent(Intent intent) {
+    private NdefMessage[] RawNDEFContent(Intent intent) {
         byte[] empty = new byte[0];
         byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
         Parcelable tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -201,7 +197,7 @@ public class NFCFramework {
         return new NdefMessage[]{msg};
     } //Only reading
 
-    public void printTag(NdefMessage[] msgs) {
+    private void printTag(NdefMessage[] msgs) {
         for (NdefMessage msg : msgs) {
             for (NdefRecord rec : msg.getRecords()) {
                 byte[] payload = rec.getPayload();
@@ -215,7 +211,7 @@ public class NFCFramework {
         //System.out.println(msgs);
     }
 
-    private int writeTag(Tag tag, NdefMessage message) {
+    public int writeTag(Tag tag, NdefMessage message) {
         try {
             int size = message.toByteArray().length;
             Ndef ndef = Ndef.get(tag);
