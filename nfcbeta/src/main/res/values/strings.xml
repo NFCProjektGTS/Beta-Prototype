@@ -14,6 +14,12 @@
     <string name="dialog_nfc_on">Einschalten</string>
     <string name="dialog_nfc_title">NFC Deaktiviert!</string>
     <string name="dialog_write">Was soll geschrieben werden?</string>
+    <string name="title_section4">Kontakt</string>
+    <string name="title_section5">Mute</string>
+    <string name="title_section6">Bild</string>
+    <string name="title_section7">Sound</string>
+    <string name="title_section8">Text</string>
+    <string name="title_section9">URL</string>
 
 
     <array name="dialog_write_opts">
