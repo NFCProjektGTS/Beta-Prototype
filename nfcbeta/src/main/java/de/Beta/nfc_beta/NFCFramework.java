@@ -302,7 +302,10 @@ public class NFCFramework {
                     //automatically handled in android os
                 } else if (contenttype.equals(Operations.OPC_SILENT)) {
                     Utils.toggleSilent(caller);
-                    Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                }else if(contenttype.equals(Operations.OPC_SOUND_01)){
+                    //TODO play sound!
+                    Toast.makeText(caller, "Sound 01 Tag detected! Playing Sound 01!", Toast.LENGTH_SHORT).show();
                 }
                 /*switch (type){
                     case Operations.OPC_CONTACT:

@@ -147,6 +147,19 @@ public class NdefCreator {
         }
         return getEmptyNdef();
     }
+    public static NdefMessage Sound01Message() {
+        //TODO SWITCH CASE FÜR SOUND
+        try {
+
+            NdefRecord record = new NdefRecord(
+                    NdefRecord.TNF_MIME_MEDIA, Operations.OPC_SOUND_01.getBytes(), new byte[0], new byte[0]);
+            NdefRecord[] records = new NdefRecord[]{record};
+            return new NdefMessage(records);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmptyNdef();
+    }
 
 
 
