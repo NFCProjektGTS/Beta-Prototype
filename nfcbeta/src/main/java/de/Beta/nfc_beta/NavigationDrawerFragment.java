@@ -36,9 +36,6 @@ public class NavigationDrawerFragment extends Fragment {
 
 
     private NavigationDrawerCallbacks mCallbacks;
-
-
-
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
