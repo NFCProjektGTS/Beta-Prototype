@@ -6,6 +6,9 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by Kern on 03.06.2014.
  */
@@ -39,19 +42,23 @@ public class InterfaceUI {
 
     public void writeStummschalten() {
         //framework.setPayload(OpCodes.OPC_SILENT); braucht man nicht
-        framework.createWriteNdef(NdefCreator.muteMessage());
-        framework.enableWrite();
-        printDebugInfo("Schreibe Stummschalten");
+        if (framework != null) {
+            framework.createWriteNdef(NdefCreator.muteMessage());
+            framework.enableWrite();
+            printDebugInfo("Schreibe Stummschalten");
+        }
     }
 
     public void writeKontakt(String payload) {
-        framework.setPayload(payload);
-        if (!framework.getPayload().equals("")) {
-            framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
-            framework.enableWrite();
+        if (framework != null) {
+            framework.setPayload(payload);
+            if (!framework.getPayload().equals("")) {
+                framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
+                framework.enableWrite();
+            }
+            //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
+            printDebugInfo("Schreibe Kontakt");
         }
-        //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
-        printDebugInfo("Schreibe Kontakt");
     }
 
     public void activateNFC() {
@@ -59,36 +66,53 @@ public class InterfaceUI {
     }
 
     public void writePicture() {
-        //select image dialog
-
+        if (framework != null) {
+            //select image dialog
+        }
     }
 
     public void writeSound() {
-        // first get soundd
-        // second create NdefMessage with sounddata
-        // third setPayload
-        //framework.setPayload(Operations.OPC_SOUND_01);
-        //framework.createWriteNdef(NdefCreator.Sound01Message());
-        //framework.enableWrite();
+        if (framework != null) {
+            // first get soundd
+            // second create NdefMessage with sounddata
+            // third setPayload
+            //framework.setPayload(Operations.OPC_SOUND_01);
+            //framework.createWriteNdef(NdefCreator.Sound01Message());
+            //framework.enableWrite();
+        }
     }
 
 
     public void writeText(String s) {
-        printDebugInfo("Schreibe Text: "+s);
-        framework.setPayload(s);
-        framework.createWriteNdef(NdefCreator.fromText(s, "de_DE"));
-        framework.enableWrite();
-        //TODO NFC ZEUG
+        if (framework != null) {
+            printDebugInfo("Schreibe Text: " + s);
+            framework.setPayload(s);
+            if (framework.getPayload() != "") {
+                framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
+                framework.enableWrite();
+            }
+            //TODO NFC ZEUG
+        }
     }
     public void writeURL(String s) {
-        framework.installService();
-        printDebugInfo("Schreibe URL: " + s);
-        //TODO NFC ZEUG
+        if (framework != null) {
+            try {
+                URL url = new URL(s);
+                framework.installService();
+                printDebugInfo("Schreibe URL: " + s);
+                framework.setPayload(s);
+                if (framework.getPayload() != "") {
+                    framework.createWriteNdef(NdefCreator.fromUrl(url));
+                    framework.enableWrite();
+                }
+            } catch (MalformedURLException e) {
+                printDebugError("URL: " + s + " malformed!");
+            }
+        }
     }
 
     public void chooseContact() {
         mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
-        //TODO KP WIE MAN DAS MACHT
     }
 
     public void choosePicture() {

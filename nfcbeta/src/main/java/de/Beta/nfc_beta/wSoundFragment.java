@@ -3,6 +3,7 @@ package de.Beta.nfc_beta;
 /**
  * Created by Kern on 14.06.2014.
  */
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import de.Beta.nfc_beta.R;
 
 
 /**
@@ -26,15 +25,16 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
+
+    public wSoundFragment() {
+    }
+
     public static wSoundFragment newInstance(int sectionNumber) {
         wSoundFragment fragment = new wSoundFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public wSoundFragment() {
     }
 
     @Override
@@ -53,10 +53,11 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+        iface = MainActivity.iface;
     }
     @Override
     public void onClick(View view) {
-        iface = new InterfaceUI(getActivity());
+        //iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
             case  R.id.button_chooseSound: {
                 iface.chooseSound();

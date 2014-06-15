@@ -3,6 +3,7 @@ package de.Beta.nfc_beta;
 /**
  * Created by Kern on 14.06.2014.
  */
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import de.Beta.nfc_beta.R;
 
 
 
@@ -23,15 +22,15 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     static InterfaceUI iface;
     EditText wtextEditText;
 
+    public wTextFragment() {
+    }
+
     public static wTextFragment newInstance(int sectionNumber) {
         wTextFragment fragment = new wTextFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public wTextFragment() {
     }
 
     @Override
@@ -49,13 +48,14 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+        iface = MainActivity.iface;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case  R.id.button_wtext: {
-                iface = new InterfaceUI(getActivity());
+                //  iface = new InterfaceUI(getActivity());
                 iface.writeText(wtextEditText.getText().toString());
                 break;
             }

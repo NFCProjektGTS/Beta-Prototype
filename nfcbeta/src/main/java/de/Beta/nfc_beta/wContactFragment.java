@@ -26,7 +26,6 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
     String contactPayload;
 
     public wContactFragment() {
-
     }
 
     public static wContactFragment newInstance(int sectionNumber) {
@@ -55,6 +54,7 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+        iface = MainActivity.iface;
     }
     void setContactName(String name){
         TextViewContactName.setText("Name: "+name);
@@ -65,7 +65,8 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        iface = new InterfaceUI(getActivity());
+        //iface = new InterfaceUI(getActivity());
+        //TEST
         switch (view.getId()) {
             case  R.id.button_wchoosecontact: {
 
