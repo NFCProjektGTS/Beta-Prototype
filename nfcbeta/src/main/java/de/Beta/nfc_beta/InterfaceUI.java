@@ -2,7 +2,6 @@ package de.Beta.nfc_beta;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -87,7 +86,7 @@ public class InterfaceUI {
     }
 
     public void chooseContact() {
-        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
+        //TODO KP WIE MAN DAS MACHT
     }
 
     public void choosePicture() {

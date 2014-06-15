@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import de.Beta.nfc_beta.R;
-
 
 /**
  * Created by Kern on 14.06.2014.
@@ -22,10 +20,14 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
 
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    static InterfaceUI iface;
     TextView TextViewContactName;
     TextView TextViewContactPhone;
-    static InterfaceUI iface;
     String contactPayload;
+
+    public wContactFragment() {
+
+    }
 
     public static wContactFragment newInstance(int sectionNumber) {
         wContactFragment fragment = new wContactFragment();
@@ -33,9 +35,6 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public wContactFragment() {
     }
 
     @Override

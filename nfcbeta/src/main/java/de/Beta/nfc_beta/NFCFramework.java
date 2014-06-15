@@ -63,7 +63,6 @@ public class NFCFramework {
     }
 
     public void installService() {
-
         if (enabled) {
 
             Intent activityIntent = new Intent(caller, caller.getClass());
@@ -302,12 +301,12 @@ public class NFCFramework {
                         //automatically handled in android os
                         break;
                     case 1003:
-                        //TODO set ImageFragmet to foreground => load and display image
+                        //TODO set SoundFragmet to foreground => load and display image
                         Operations.initSound(caller);
                         Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1004:
-                        //TODO set SoundFragment to foreground => load and play sound
+                        //TODO set ImageFragment to foreground => load and play sound
                         Operations.initImage(caller);
                         Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;

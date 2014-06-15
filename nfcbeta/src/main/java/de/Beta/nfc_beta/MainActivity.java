@@ -248,8 +248,8 @@ public class MainActivity extends ActionBarActivity
                     Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
-
             }
+
         }
     }
 
