@@ -69,7 +69,6 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
         //TEST
         switch (view.getId()) {
             case  R.id.button_wchoosecontact: {
-
                 iface.chooseContact();
                 break;
             }

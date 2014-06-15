@@ -129,11 +129,17 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
 
+
+
         }
 
     }
 
+    public void showTextFragment(String text){
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,TextFragment.newInstance(text)).commit();
+
+    }
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -193,9 +199,7 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
     @Override
