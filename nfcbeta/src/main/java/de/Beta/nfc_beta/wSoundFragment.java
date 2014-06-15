@@ -22,7 +22,7 @@ import android.widget.Button;
  * A placeholder fragment containing a simple view.
  */
 public  class wSoundFragment extends Fragment implements View.OnClickListener{
-
+    Sound msound = new Sound();
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
 
@@ -69,6 +69,15 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
             }
         }
     }
+    //wenn die Sound Seite verlassen wird hört der Sound auf zu spielen
+    @Override
+    public void onPause() {
+        boolean offen = Fragment.isDetached();
+        if(offen == true) {
+            msound.soundPausieren();
+        }
+    }
+
 }
 
 

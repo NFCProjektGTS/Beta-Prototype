@@ -13,6 +13,8 @@ import java.net.URL;
  * Created by Kern on 03.06.2014.
  */
 public class InterfaceUI {
+    private final int ACTIVITY_CHOOSE_FILE = 1;
+    Sound msound = new Sound();
     Activity mContext;
     NFCFramework framework = MainActivity.framework;
     DebugFragment df = MainActivity.df;
@@ -119,9 +121,18 @@ public class InterfaceUI {
 
     }
 
+    // Sound Methoden
     public void chooseSound() {
         // coose from ressources
 
     }
+
+    public void playSound() {
+
+    }
+    public void pauseSound() {
+
+    }
+
 }
 
