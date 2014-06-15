@@ -20,6 +20,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -32,13 +38,14 @@ public class NavigationDrawerFragment extends Fragment {
     private NavigationDrawerCallbacks mCallbacks;
 
 
+
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 0;
+    private int mCurrentSelectedPosition = 1;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     public NavigationDrawerFragment() {
@@ -80,7 +87,24 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+        DrawerAdapter adapter = new DrawerAdapter(getActivity().getApplicationContext());
+        adapter.addSection("NFC-BETA", new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.drawer_item, new String[] {
+                getString(R.string.title_section1),
+                getString(R.string.title_section2)
+        }));
+        adapter.addSection("SCHREIBEN", new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.drawer_item, new String[] {
+                getString(R.string.title_section3),
+                getString(R.string.title_section4),
+                getString(R.string.title_section5),
+                getString(R.string.title_section6),
+                getString(R.string.title_section7),
+                getString(R.string.title_section8)
+        }));
+
+       /* mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -93,7 +117,10 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section6),
                         getString(R.string.title_section7),
                         getString(R.string.title_section8),
-                }));
+                }));*/
+
+
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -267,5 +294,11 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+    public Map<String,?> createItem(String title, String caption) {
+        Map<String,String> item = new HashMap<String,String>();
+        item.put("title", title);
+        item.put("caption", caption);
+        return item;
     }
 }
