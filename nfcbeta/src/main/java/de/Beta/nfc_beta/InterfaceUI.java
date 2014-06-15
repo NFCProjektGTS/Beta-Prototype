@@ -116,9 +116,12 @@ public class InterfaceUI {
     }
 
     public void choosePicture() {
+        // coose from ressources
+
     }
 
     public void chooseSound() {
+        // coose from ressources
 
     }
 }
