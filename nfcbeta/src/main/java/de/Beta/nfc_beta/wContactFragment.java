@@ -25,6 +25,7 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
     TextView TextViewContactName;
     TextView TextViewContactPhone;
     static InterfaceUI iface;
+    String contactPayload;
 
     public static wContactFragment newInstance(int sectionNumber) {
         wContactFragment fragment = new wContactFragment();
@@ -56,20 +57,35 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
     }
+    void setContactName(String name){
+        TextViewContactName.setText("Name: "+name);
+    }
+    void setContactPhone(String phone){
+        TextViewContactPhone.setText("Nummer: "+phone);
+    }
 
     @Override
     public void onClick(View view) {
         iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
             case  R.id.button_wchoosecontact: {
+
                 iface.chooseContact();
                 break;
             }
             case R.id.button_wcontact:{
-                iface.writeKontakt();
+                if(contactPayload!=null){
+                    iface.writeKontakt(contactPayload);
+                }
+                else{ iface.showToast("Kein Kontakt gewählt!");}
                 break;
             }
         }
+    }
+    void setContactPayload(String payload,String name,String phone){
+        this.contactPayload= payload;
+        setContactName(name);
+        setContactPhone(phone);
     }
 }
 

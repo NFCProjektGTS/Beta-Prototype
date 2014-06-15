@@ -101,7 +101,7 @@ public class DebugFragment extends Fragment implements DebugChangeListener.Liste
         if(a!=null){
             dcl.changed();
         }else {
-            System.out.println(line);
+            System.out.println("Error: " + line);
         }
 
     }

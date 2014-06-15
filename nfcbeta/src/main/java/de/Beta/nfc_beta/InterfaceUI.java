@@ -44,8 +44,13 @@ public class InterfaceUI {
         printDebugInfo("Schreibe Stummschalten");
     }
 
-    public void writeKontakt() {
-        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
+    public void writeKontakt(String payload) {
+        framework.setPayload(payload);
+        if (!framework.getPayload().equals("")) {
+            framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
+            framework.enableWrite();
+        }
+        //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
         printDebugInfo("Schreibe Kontakt");
     }
 
@@ -82,7 +87,7 @@ public class InterfaceUI {
     }
 
     public void chooseContact() {
-       //TODO KP WIE MAN DAS MACHT 
+        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
     }
 
     public void choosePicture() {

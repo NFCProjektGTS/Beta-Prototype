@@ -40,7 +40,7 @@ public class Dialog {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case 0:
-                                        iface.writeKontakt();
+                                       // iface.writeKontakt();
                                         break;
                                     case 1:
                                         iface.writeStummschalten();

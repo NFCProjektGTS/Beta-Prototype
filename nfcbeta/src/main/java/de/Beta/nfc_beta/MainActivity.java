@@ -23,8 +23,14 @@ public class MainActivity extends ActionBarActivity
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
+    public static wContactFragment wcf;
+    public static wTextFragment wtf;
+    public static wPictureFragment wpf;
+    public static wSoundFragment wsf;
+    public static wURLFragment wuf;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+
 
     @Override
     protected void onStop() {
@@ -54,7 +60,15 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
+
         df = new DebugFragment();
+        wcf = wContactFragment.newInstance(5);
+        wpf = wPictureFragment.newInstance(7);
+        wsf = wSoundFragment.newInstance(8);
+        wtf = wTextFragment.newInstance(9);
+        wuf = wURLFragment.newInstance(10);
         iface = new InterfaceUI(this);
         framework = new NFCFramework(this, iface);
 
@@ -83,7 +97,7 @@ public class MainActivity extends ActionBarActivity
             //SKIP 4 weil überschrift Schreiben
             case 5:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wContactFragment.newInstance(position + 1))
+                        .replace(R.id.container,wcf)
                         .commit();
                 break;
             case 6:
@@ -93,22 +107,22 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 7:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wPictureFragment.newInstance(position + 1))
+                        .replace(R.id.container, wpf)
                         .commit();
                 break;
             case 8:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wSoundFragment.newInstance(position + 1))
+                        .replace(R.id.container, wsf)
                         .commit();
                 break;
             case 9:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wTextFragment.newInstance(position + 1))
+                        .replace(R.id.container, wtf)
                         .commit();
                 break;
             case 10:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wURLFragment.newInstance(position + 1))
+                        .replace(R.id.container, wuf)
                         .commit();
                 break;
 
@@ -221,23 +235,21 @@ public class MainActivity extends ActionBarActivity
                 Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
                 AssetFileDescriptor fd;
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                String nummer  = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 try {
                     fd = getContentResolver().openAssetFileDescriptor(uri, "r");
                     FileInputStream fis = fd.createInputStream();
                     byte[] buf = new byte[(int) fd.getDeclaredLength()];
                     fis.read(buf);
-                    framework.setPayload(new String(buf));
+                    wcf.setContactPayload(new String(buf), name, nummer);
                     Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_SHORT).show();
+
                 } catch (Exception e) {
                     Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
             }
-        }
-        if (!framework.getPayload().equals("")) {
-            framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
-            framework.enableWrite();
         }
     }
 
