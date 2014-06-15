@@ -4,20 +4,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="#ff2b2b2b">
+    >
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_wtext"
-        android:layout_weight="0.12"
-        android:text="Beispiel Text" />
+        android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="116dp"
+        android:layout_width="161dp"
         android:layout_height="59dp"
         android:text="Schreibe Text"
         android:id="@+id/button_wtext"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.06" />
 </LinearLayout>

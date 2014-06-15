@@ -69,48 +69,48 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position+1){
-            case 1:
+/*            case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance(position + 1))
                         .commit();
 
-                break;
-            case 2:
+                break;*/
+            case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, DebugFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 3:
+            case 2:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, InfoFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 4:
+            case 3:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wContactFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 5:
+            case 4:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wMuteFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 6:
+            case 5:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wPictureFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 7:
+            case 6:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wSoundFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 8:
+            case 7:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wTextFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 9:
+            case 8:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, wURLFragment.newInstance(position + 1))
                         .commit();
@@ -147,9 +147,6 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 8:
                 mTitle = getString(R.string.title_section8);
-                break;
-            case 9:
-                mTitle = getString(R.string.title_section9);
                 break;
         }
     }

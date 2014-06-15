@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">NFC</string>
-    <string name="title_section1">Start</string>
-    <string name="title_section2">Debug</string>
-    <string name="title_section3">Info/Rest</string>
+    <string name="title_section1">Log</string>
+    <string name="title_section2">Info</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_write">Schreiben</string>
@@ -14,12 +13,12 @@
     <string name="dialog_nfc_on">Einschalten</string>
     <string name="dialog_nfc_title">NFC Deaktiviert!</string>
     <string name="dialog_write">Was soll geschrieben werden?</string>
-    <string name="title_section4">Kontakt</string>
-    <string name="title_section5">Mute</string>
-    <string name="title_section6">Bild</string>
-    <string name="title_section7">Sound</string>
-    <string name="title_section8">Text</string>
-    <string name="title_section9">URL</string>
+    <string name="title_section3">Kontakt</string>
+    <string name="title_section4">Mute</string>
+    <string name="title_section5">Bild</string>
+    <string name="title_section6">Sound</string>
+    <string name="title_section7">Text</string>
+    <string name="title_section8">URL</string>
 
 
     <array name="dialog_write_opts">
