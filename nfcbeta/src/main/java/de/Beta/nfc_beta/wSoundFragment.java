@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import de.Beta.nfc_beta.R;
 
@@ -21,17 +22,10 @@ import de.Beta.nfc_beta.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public  class wSoundFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
+public  class wSoundFragment extends Fragment implements View.OnClickListener{
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
+    private static final String ARG_SECTION_NUMBER = "section_number";
+    static InterfaceUI iface;
     public static wSoundFragment newInstance(int sectionNumber) {
         wSoundFragment fragment = new wSoundFragment();
         Bundle args = new Bundle();
@@ -47,6 +41,10 @@ public  class wSoundFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wsound, container, false);
+        Button chooseSoundButton =(Button) rootView.findViewById(R.id.button_chooseSound);
+        Button wSoundButton =(Button) rootView.findViewById(R.id.button_wSound);
+        chooseSoundButton.setOnClickListener(this);
+        wSoundButton.setOnClickListener(this);
         return rootView;
     }
 
@@ -55,6 +53,20 @@ public  class wSoundFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+    @Override
+    public void onClick(View view) {
+        iface = new InterfaceUI(getActivity());
+        switch (view.getId()) {
+            case  R.id.button_chooseSound: {
+                iface.chooseSound();
+                break;
+            }
+            case  R.id.button_wSound: {
+                iface.writeSound();
+                break;
+            }
+        }
     }
 }
 

@@ -37,6 +37,11 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -204,7 +209,7 @@ public class MainActivity extends ActionBarActivity
         setIntent(new Intent());
         if (framework == null) {
             if (framework.checkNFC()) {
-                //framework.installService();//TODO BUGT RUM!
+                framework.installService();
             }
         }
     }

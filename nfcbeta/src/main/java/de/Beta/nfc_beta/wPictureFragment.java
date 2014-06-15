@@ -9,29 +9,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import de.Beta.nfc_beta.R;
 
 
-/**
- * Created by Kern on 02.06.2014.
- */
+public  class wPictureFragment extends Fragment implements View.OnClickListener {
 
-
-/**
- * A placeholder fragment containing a simple view.
- */
-public  class wPictureFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    static InterfaceUI iface;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static wPictureFragment newInstance(int sectionNumber) {
         wPictureFragment fragment = new wPictureFragment();
         Bundle args = new Bundle();
@@ -47,6 +34,10 @@ public  class wPictureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wpicture, container, false);
+        Button choosePictureButton =(Button) rootView.findViewById(R.id.button_choosePicture);
+        Button wPictureButton =(Button) rootView.findViewById(R.id.button_wPicture);
+        choosePictureButton.setOnClickListener(this);
+        wPictureButton.setOnClickListener(this);
         return rootView;
     }
 
@@ -55,6 +46,20 @@ public  class wPictureFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+    @Override
+    public void onClick(View view) {
+        iface = new InterfaceUI(getActivity());
+        switch (view.getId()) {
+            case  R.id.button_choosePicture: {
+                iface.choosePicture();
+                break;
+            }
+            case  R.id.button_wPicture: {
+                iface.writePicture();
+                break;
+            }
+        }
     }
 }
 

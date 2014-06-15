@@ -48,7 +48,6 @@ public class NFCFramework {
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         this.mTagFilters = new IntentFilter[]{tagDetected};
 
-
     }
 
     public boolean isEnabled() {
@@ -64,7 +63,9 @@ public class NFCFramework {
     }
 
     public void installService() {
+
         if (enabled) {
+
             Intent activityIntent = new Intent(caller, caller.getClass());
             activityIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
@@ -87,9 +88,11 @@ public class NFCFramework {
                 wai.printDebugWarn("NFC is disabled");
                 new Dialog(caller, 0);
                 if (mNfcAdapter.isEnabled()) {
+
                     return true;
                 }
             }
+
             return true;
         } else {
             wai.showToast("NFC Hardware nicht gefunden");

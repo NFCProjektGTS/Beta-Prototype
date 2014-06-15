@@ -18,20 +18,9 @@ import de.Beta.nfc_beta.R;
  */
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public  class wWayFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
+    private static final String ARG_SECTION_NUMBER = "section_number";
     public static wWayFragment newInstance(int sectionNumber) {
         wWayFragment fragment = new wWayFragment();
         Bundle args = new Bundle();
