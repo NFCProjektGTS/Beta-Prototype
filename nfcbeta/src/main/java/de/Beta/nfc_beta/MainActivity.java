@@ -20,6 +20,10 @@ import java.io.FileInputStream;
 public class MainActivity extends ActionBarActivity
    implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    /* Activity Result Codes*/
+    public static final int RQS_PICK_CONTACT = 2;
+    public static final int RQS_PICK_SOUND = 3;
+    public static final int RQS_PICK_IMAGE = 4;
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
@@ -30,7 +34,6 @@ public class MainActivity extends ActionBarActivity
     public static wURLFragment wuf;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-
 
     @Override
     protected void onStop() {
@@ -225,31 +228,43 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) { //TODO switch requestCode!!
-            if (resultCode == RESULT_OK) {
-                Uri contactData = data.getData();
+        switch (requestCode) {
+            case RQS_PICK_CONTACT:
+                if (resultCode == RESULT_OK) {
+                    Uri contactData = data.getData();
 
-                Cursor cursor = managedQuery(contactData, null, null, null, null);
-                cursor.moveToFirst();
-                String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-                Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
-                AssetFileDescriptor fd;
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                String nummer  = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                try {
-                    fd = getContentResolver().openAssetFileDescriptor(uri, "r");
-                    FileInputStream fis = fd.createInputStream();
-                    byte[] buf = new byte[(int) fd.getDeclaredLength()];
-                    fis.read(buf);
-                    wcf.setContactPayload(new String(buf), name, nummer);
-                    Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_SHORT).show();
+                    Cursor cursor = managedQuery(contactData, null, null, null, null);
+                    cursor.moveToFirst();
+                    String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+                    Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
+                    AssetFileDescriptor fd;
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String nummer = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    try {
+                        fd = getContentResolver().openAssetFileDescriptor(uri, "r");
+                        FileInputStream fis = fd.createInputStream();
+                        byte[] buf = new byte[(int) fd.getDeclaredLength()];
+                        fis.read(buf);
+                        wcf.setContactPayload(new String(buf), name, nummer);
+                        Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_SHORT).show();
 
-                } catch (Exception e) {
-                    Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(this, "Failure result, could not load Contact.", Toast.LENGTH_SHORT).show();
                 }
-            }
-
+                break;
+            case RQS_PICK_SOUND:
+                // sound zum schreiben vorbereiten
+                break;
+            case RQS_PICK_IMAGE:
+                // image zum schreiben vorbereiten
+                break;
+            default:
+                iface.printDebugWarn("Activity Result unknown!");
+                break;
         }
     }
 

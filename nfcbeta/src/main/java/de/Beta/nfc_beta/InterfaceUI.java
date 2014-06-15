@@ -91,7 +91,6 @@ public class InterfaceUI {
                 framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
                 framework.enableWrite();
             }
-            //TODO NFC ZEUG
         }
     }
     public void writeURL(String s) {
@@ -112,7 +111,7 @@ public class InterfaceUI {
     }
 
     public void chooseContact() {
-        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
+        mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 2); //2 == RQS_PICK_CONTACT
     }
 
     public void choosePicture() {
