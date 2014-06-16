@@ -70,13 +70,7 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
         }
     }
     //wenn die Sound Seite verlassen wird hört der Sound auf zu spielen
-    @Override
-    public void onPause() {
-        boolean offen = Fragment.isDetached();
-        if(offen == true) {
-            msound.soundPausieren();
-        }
-    }
+
 
 }
 

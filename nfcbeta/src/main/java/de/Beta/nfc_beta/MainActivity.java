@@ -219,7 +219,8 @@ public class MainActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
         setIntent(new Intent());
-        if (framework == null) {
+
+        if (framework != null) {
             if (framework.checkNFC()) {
                 framework.installService();
             }
