@@ -20,11 +20,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class NavigationDrawerFragment extends Fragment {
@@ -283,6 +280,12 @@ public class NavigationDrawerFragment extends Fragment {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
     }
 
+    public Map<String, ?> createItem(String title, String caption) {
+        Map<String, String> item = new HashMap<String, String>();
+        item.put("title", title);
+        item.put("caption", caption);
+        return item;
+    }
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
@@ -291,11 +294,5 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
-    }
-    public Map<String,?> createItem(String title, String caption) {
-        Map<String,String> item = new HashMap<String,String>();
-        item.put("title", title);
-        item.put("caption", caption);
-        return item;
     }
 }

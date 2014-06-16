@@ -24,7 +24,6 @@ public class MainActivity extends ActionBarActivity
     public static final int RQS_PICK_CONTACT = 2;
     public static final int RQS_PICK_SOUND = 3;
     public static final int RQS_PICK_IMAGE = 4;
-
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
@@ -36,7 +35,6 @@ public class MainActivity extends ActionBarActivity
     public static FragmentManager fragmentManager;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-
 
     @Override
     protected void onStop() {
@@ -55,6 +53,9 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        iface = new InterfaceUI(this);
+        framework = new NFCFramework(this, iface);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
@@ -75,11 +76,9 @@ public class MainActivity extends ActionBarActivity
         wsf = wSoundFragment.newInstance(8);
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
-        iface = new InterfaceUI(this);
-        framework = new NFCFramework(this, iface);
 
 
-
+        //framework.installService(); //TODO BUGT RUM!
 
 
     }
@@ -175,7 +174,6 @@ public class MainActivity extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
 
     @Override
