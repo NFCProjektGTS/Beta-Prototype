@@ -98,11 +98,11 @@ public class InterfaceUI {
             }
         }
     }
+
     public void writeURL(String s) {
         if (framework != null) {
             try {
                 URL url = new URL(s);
-                framework.installService();
                 printDebugInfo("Schreibe URL: " + s);
                 framework.setPayload(s);
                 if (framework.getPayload() != "") {
@@ -133,6 +133,7 @@ public class InterfaceUI {
     public void playSound() {
 
     }
+
     public void pauseSound() {
 
     }

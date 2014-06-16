@@ -56,7 +56,7 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
             case  R.id.button_wURL: {
                 new WritingAnimationFragment().startAnimation();
                 //iface = new InterfaceUI(getActivity());
-                iface.writeURL(wurlEditText.toString());
+                iface.writeURL(wurlEditText.getText().toString());
                 break;
             }
         }
