@@ -18,11 +18,22 @@ import java.io.FileInputStream;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+   implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    /* Activity Result Codes*/
+    public static final int RQS_PICK_CONTACT = 2;
+    public static final int RQS_PICK_SOUND = 3;
+    public static final int RQS_PICK_IMAGE = 4;
 
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
+    public static wContactFragment wcf;
+    public static wTextFragment wtf;
+    public static wPictureFragment wpf;
+    public static wSoundFragment wsf;
+    public static wURLFragment wuf;
+    public static FragmentManager fragmentManager;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
@@ -34,6 +45,11 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -49,10 +65,19 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        df = new DebugFragment();
-        iface = new InterfaceUI(this);
 
+
+
+        df = new DebugFragment();
+        wcf = wContactFragment.newInstance(5);
+        wpf = wPictureFragment.newInstance(7);
+        wsf = wSoundFragment.newInstance(8);
+        wtf = wTextFragment.newInstance(9);
+        wuf = wURLFragment.newInstance(10);
+        iface = new InterfaceUI(this);
         framework = new NFCFramework(this, iface);
+
+
         //framework.installService(); //TODO BUGT RUM!
 
 
@@ -63,73 +88,65 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position+1){
-            case 1:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MainFragment.newInstance(position +1 ))
-                        .commit();
-
-                break;
+            //SKIP 1 weil überschrift NFC-Beta
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, DebugFragment.newInstance(position +1))
+                        .replace(R.id.container, DebugFragment.newInstance(position + 1))
                         .commit();
                 break;
             case 3:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, InfoFragment.newInstance(position +1))
+                        .replace(R.id.container, InfoFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 4:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, wContactFragment.newInstance(position +1))
-                        .commit();
-                break;
+            //SKIP 4 weil überschrift Schreiben
             case 5:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wMuteFragment.newInstance(position +1))
+                        .replace(R.id.container,wcf)
                         .commit();
                 break;
             case 6:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wPictureFragment.newInstance(position +1))
+                        .replace(R.id.container, wMuteFragment.newInstance(position + 1))
                         .commit();
                 break;
             case 7:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wSoundFragment.newInstance(position +1))
+                        .replace(R.id.container, wpf)
                         .commit();
                 break;
             case 8:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wTextFragment.newInstance(position +1))
+                        .replace(R.id.container, wsf)
                         .commit();
                 break;
             case 9:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, wURLFragment.newInstance(position +1))
+                        .replace(R.id.container, wtf)
                         .commit();
                 break;
-
-
+            case 10:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, wuf)
+                        .commit();
+                break;
 
         }
 
     }
 
-    public void showTextFragment(String text){
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,TextFragment.newInstance(text)).commit();
-
-    }
 
     public void onSectionAttached(int number) {
         switch (number) {
+            //SKIP 1 weil überschrift NFC-Beta
             case 2:
                 mTitle = getString(R.string.title_section1);
                 break;
             case 3:
                 mTitle = getString(R.string.title_section2);
                 break;
+            //SKIP 4 weil überschrift Schreiben
             case 5:
                 mTitle = getString(R.string.title_section3);
                 break;
@@ -148,9 +165,6 @@ public class MainActivity extends ActionBarActivity
             case 10:
                 mTitle = getString(R.string.title_section8);
                 break;
-           // case 9:
-             //   mTitle = getString(R.string.title_section9);
-               // break;
         }
     }
 
@@ -181,7 +195,9 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if (id == R.id.action_settings) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
     @Override
@@ -205,43 +221,55 @@ public class MainActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
         setIntent(new Intent());
+
         if (framework != null) {
             if (framework.checkNFC()) {
-                //framework.installService();//TODO BUGT RUM!
+                framework.installService();
             }
         }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) { //TODO switch requestCode!!
-            if (resultCode == RESULT_OK) {
-                Uri contactData = data.getData();
+        switch (requestCode) {
+            case RQS_PICK_CONTACT:
+                if (resultCode == RESULT_OK) {
+                    Uri contactData = data.getData();
 
-                Cursor cursor = managedQuery(contactData, null, null, null, null);
-                cursor.moveToFirst();
-                String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-                Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
-                AssetFileDescriptor fd;
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                try {
-                    fd = getContentResolver().openAssetFileDescriptor(uri, "r");
-                    FileInputStream fis = fd.createInputStream();
-                    byte[] buf = new byte[(int) fd.getDeclaredLength()];
-                    fis.read(buf);
-                    framework.setPayload(new String(buf));
-                    Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
+                    Cursor cursor = managedQuery(contactData, null, null, null, null);
+                    cursor.moveToFirst();
+                    String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+                    Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
+                    AssetFileDescriptor fd;
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String nummer = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    try {
+                        fd = getContentResolver().openAssetFileDescriptor(uri, "r");
+                        FileInputStream fis = fd.createInputStream();
+                        byte[] buf = new byte[(int) fd.getDeclaredLength()];
+                        fis.read(buf);
+                        wcf.setContactPayload(new String(buf), name, nummer);
+                        Toast.makeText(this, "Contact: " + name + " selected to write on NFC-Tag!", Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Failed to load Contact: " + name, Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(this, "Failure result, could not load Contact.", Toast.LENGTH_SHORT).show();
                 }
-
-            }
-        }
-        if (!framework.getPayload().equals("")) {
-            framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
-            framework.enableWrite();
+                break;
+            case RQS_PICK_SOUND:
+                // sound zum schreiben vorbereiten
+                break;
+            case RQS_PICK_IMAGE:
+                // image zum schreiben vorbereiten
+                break;
+            default:
+                iface.printDebugWarn("Activity Result unknown!");
+                break;
         }
     }
+
 
 }

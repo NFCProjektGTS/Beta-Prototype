@@ -1,5 +1,6 @@
 package de.Beta.nfc_beta;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 
@@ -23,5 +24,9 @@ public class Operations {
 
     public static void initImage(Context ctx) {
 
+    }
+    public static void initText(String text){
+        TextFragment t = TextFragment.newInstance(text);
+        MainActivity.fragmentManager.beginTransaction().replace(R.id.container,  t).commit();
     }
 }

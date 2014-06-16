@@ -313,6 +313,10 @@ public class NFCFramework {
                     case 1005:
                         //placeholder
                         break;
+                    case 1006:
+                        Toast.makeText(caller, "Text Tag detected! show Text", Toast.LENGTH_SHORT).show();
+                        Operations.initText("HIER DER TEXT AUF DEM TAG");//TODO TEXT AUF TAG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        break;
                     default:
                         //
                         break;
