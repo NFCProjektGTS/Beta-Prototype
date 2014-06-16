@@ -46,7 +46,7 @@ public class Dialog {
                                         iface.writeStummschalten();
                                         break;
                                     case 2:
-                                        iface.writePicture();
+                                        iface.writePicture(null);
                                         break;
                                     case 3:
                                         iface.writeSound();

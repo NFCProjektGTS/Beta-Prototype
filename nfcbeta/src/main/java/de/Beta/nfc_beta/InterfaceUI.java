@@ -2,10 +2,12 @@ package de.Beta.nfc_beta;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -68,7 +70,7 @@ public class InterfaceUI {
         mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
     }
 
-    public void writePicture() {
+    public void writePicture(String pictureFillName) {
         if (framework != null) {
             //select image dialog
         }
@@ -120,6 +122,13 @@ public class InterfaceUI {
     }
 
     public void choosePicture() {
+        try {
+            String[] ourPictures = mContext.getAssets().list("pictures");
+            ((MainActivity) mContext ).wpf.setImageList(ourPictures);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // coose from ressources
 
     }
