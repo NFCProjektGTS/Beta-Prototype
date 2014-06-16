@@ -86,7 +86,9 @@ public class InterfaceUI {
 
 
     public void writeText(String s) {
-        if (framework != null) {
+        showToast("HALLO");
+
+        if (framework != null) {//TODO FRAMEWORK = NULL ?! WARUM!?
             printDebugInfo("Schreibe Text: " + s);
             framework.setPayload(s);
             if (framework.getPayload() != "") {

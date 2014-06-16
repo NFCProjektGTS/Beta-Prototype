@@ -17,4 +17,5 @@ public interface OpCodes {
     public static final int OPC_SOUND = 1003;
     public static final int OPC_IMAGE = 1004;
     public static final int OPC_ROUTE = 1005; // GPS Koordinaten
+    public static final int OPC_TEXT = 1006;
 }
