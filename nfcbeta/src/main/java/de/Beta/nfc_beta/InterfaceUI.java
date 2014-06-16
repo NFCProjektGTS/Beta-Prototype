@@ -18,12 +18,13 @@ public class InterfaceUI {
     private final int ACTIVITY_CHOOSE_FILE = 1;
     Sound msound = new Sound();
     Activity mContext;
-    NFCFramework framework = MainActivity.framework;
+    NFCFramework framework;
     DebugFragment df = MainActivity.df;
 
     InterfaceUI(Activity c) {
         mContext = c;
-
+        MainActivity.framework = new NFCFramework(mContext, this);
+        framework = MainActivity.framework;
     }
 
 

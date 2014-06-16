@@ -1,8 +1,8 @@
 package de.Beta.nfc_beta;
 
-import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
+import android.nfc.NdefRecord;
 
 /**
  * Created by Noli on 14.06.2014.
@@ -17,16 +17,18 @@ public class Operations {
         }
     }
 
-    public static void initSound(Context ctx) {
+    public static void initSound(NdefRecord msg) {
 
 
     }
 
-    public static void initImage(Context ctx) {
+    public static void initImage(NdefRecord msg) {
 
     }
-    public static void initText(String text){
-        TextFragment t = TextFragment.newInstance(text);
+
+    public static void initText(NdefRecord msg) {
+
+        TextFragment t = TextFragment.newInstance(new String(msg.getPayload()));
         MainActivity.fragmentManager.beginTransaction().replace(R.id.container,  t).commit();
     }
 }

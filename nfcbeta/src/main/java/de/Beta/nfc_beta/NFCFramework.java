@@ -302,20 +302,20 @@ public class NFCFramework {
                         break;
                     case 1003:
                         //TODO set SoundFragmet to foreground => load and display image
-                        Operations.initSound(caller);
-                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        Operations.initSound(rec);
+                        //Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1004:
                         //TODO set ImageFragment to foreground => load and play sound
-                        Operations.initImage(caller);
-                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        Operations.initImage(rec);
+                        //Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
                         break;
                     case 1005:
                         //placeholder
                         break;
                     case 1006:
                         Toast.makeText(caller, "Text Tag detected! show Text", Toast.LENGTH_SHORT).show();
-                        Operations.initText("HIER DER TEXT AUF DEM TAG");//TODO TEXT AUF TAG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        Operations.initText(rec);//TODO TEXT AUF TAG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         break;
                     default:
                         //
