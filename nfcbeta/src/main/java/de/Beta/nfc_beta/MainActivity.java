@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity
     public static final int RQS_PICK_CONTACT = 2;
     public static final int RQS_PICK_SOUND = 3;
     public static final int RQS_PICK_IMAGE = 4;
+    /*END*/
 
     public static NFCFramework framework;
     public static InterfaceUI iface;
@@ -36,7 +37,6 @@ public class MainActivity extends ActionBarActivity
     public static FragmentManager fragmentManager;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-
 
     @Override
     protected void onStop() {
@@ -55,7 +55,13 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+        //TODO FATAL ERROR iface initialized before framwork, framework requires iface
+        //TODO fix obstacle
+
+        //framework = new NFCFramework(this, iface);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -75,11 +81,9 @@ public class MainActivity extends ActionBarActivity
         wsf = wSoundFragment.newInstance(8);
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
+
         iface = new InterfaceUI(this);
-        framework = new NFCFramework(this, iface);
-
-
-
+        //framework.installService(); //TODO BUGT RUM!
 
 
     }
@@ -177,7 +181,6 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -196,10 +199,10 @@ public class MainActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        /*int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
     @Override

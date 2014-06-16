@@ -13,7 +13,7 @@ public class Dialog {
     static InterfaceUI iface;
 
     Dialog(final Activity mContext, int id) {
-        iface = new InterfaceUI(mContext);
+        iface = MainActivity.iface;
         switch (id) {
             case 0:
                 new AlertDialog.Builder(mContext)
