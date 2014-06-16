@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
@@ -118,8 +117,7 @@ public class InterfaceUI {
     }
 
     public void choosePicture() {
-
-
+        // coose from ressources
 
     }
 

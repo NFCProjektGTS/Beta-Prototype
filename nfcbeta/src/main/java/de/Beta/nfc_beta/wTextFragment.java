@@ -21,6 +21,7 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     EditText wtextEditText;
+    WritingAnimationFragment animateFragment;
 
     public wTextFragment() {
     }
@@ -40,8 +41,15 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
         Button wtextButton =(Button) rootView.findViewById(R.id.button_wtext);
         wtextEditText   = (EditText)rootView.findViewById(R.id.editText_wtext);
         wtextButton.setOnClickListener(this);
+
+        animateFragment = new WritingAnimationFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.animation_frame, animateFragment)
+                .commit();
+
         return rootView;
     }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -55,8 +63,11 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case  R.id.button_wtext: {
-                //  iface = new InterfaceUI(getActivity());
+                animateFragment.startAnimation();
                 iface.writeText(wtextEditText.getText().toString());
+                //animateFragment.stopAnimation();
+                //  iface = new InterfaceUI(getActivity());
+
                 break;
             }
         }

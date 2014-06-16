@@ -100,7 +100,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getString(R.string.title_section5),
                 getString(R.string.title_section6),
                 getString(R.string.title_section7),
-                getString(R.string.title_section8)
+                getString(R.string.title_section8),
         }));
 
         mDrawerListView.setAdapter(adapter);
@@ -244,13 +244,21 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+/*
+        if (item.getItemId() == R.id.action_write) {
+            //new Dialog(getView().getContext(),1); test fix. Context zu Acitivity in Dialog.class
+            new Dialog(getActivity(), 1);
+            return true;
+        }
 
-
-
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);*/ //von mir ausgeklammert weil ein Fehler geworfen wurde
+     return true; // zeile von mir eingefügt, nachdem ich die if schleife auskommentiert habe
     }
 
-
+    /**
+     * Per the navigation drawer design guidelines, updates the action bar to show the global app
+     * 'context', rather than just what's in the current screen.
+     */
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
@@ -262,8 +270,13 @@ public class NavigationDrawerFragment extends Fragment {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
     }
 
+    /**
+     * Callbacks interface that all activities using this fragment must implement.
+     */
     public static interface NavigationDrawerCallbacks {
-
+        /**
+         * Called when an item in the navigation drawer is selected.
+         */
         void onNavigationDrawerItemSelected(int position);
     }
     public Map<String,?> createItem(String title, String caption) {
