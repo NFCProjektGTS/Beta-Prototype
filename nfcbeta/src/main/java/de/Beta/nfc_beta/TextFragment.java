@@ -43,9 +43,6 @@ public  class TextFragment extends Fragment {
         return rootView;
     }
 
-    public void setText() {
-
-    }
 
     @Override
     public void onAttach(Activity activity) {
