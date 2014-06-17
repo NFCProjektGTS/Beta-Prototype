@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
         iface = new InterfaceUI(this);
-        framework = new NFCFramework(this, iface);
+        //framework = new NFCFramework(this, iface);
 
 
 

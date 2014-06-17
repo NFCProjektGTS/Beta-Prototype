@@ -89,12 +89,10 @@ public class InterfaceUI {
 
 
     public void writeText(String s) {
-        showToast("HALLO");
-
-        if (framework != null) {//TODO FRAMEWORK = NULL ?! WARUM!?
+        if (framework != null) {
             printDebugInfo("Schreibe Text: " + s);
             framework.setPayload(s);
-            if (framework.getPayload() != "") {
+            if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
                 framework.enableWrite();
             }
@@ -107,7 +105,7 @@ public class InterfaceUI {
                 URL url = new URL(s);
                 printDebugInfo("Schreibe URL: " + s);
                 framework.setPayload(s);
-                if (framework.getPayload() != "") {
+                if (!framework.getPayload().equals("")) {
                     framework.createWriteNdef(NdefCreator.fromUrl(url));
                     framework.enableWrite();
                 }

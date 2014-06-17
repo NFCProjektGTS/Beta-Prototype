@@ -271,7 +271,7 @@ public class NFCFramework {
         if (enabled) {
             if (this.mWriteNdef != null) {
                 this.WriteMode = true;
-                Toast.makeText(caller, "Writemode enabled", Toast.LENGTH_LONG).show();
+                Toast.makeText(caller, "Writemode enabled", Toast.LENGTH_SHORT).show();
                 wai.printDebugInfo("Please scan a NFC Tag to write on");
             } else {
                 wai.printDebugInfo("No Data specified!");
@@ -285,7 +285,7 @@ public class NFCFramework {
             this.mWriteNdef = null;
             this.WriteMode = false;
             this.payload = "";
-            Toast.makeText(caller, "Writemode disabled", Toast.LENGTH_LONG).show();
+            Toast.makeText(caller, "Writemode disabled", Toast.LENGTH_SHORT).show();
         }
     }
 
