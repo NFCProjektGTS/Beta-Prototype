@@ -24,6 +24,7 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
     TextView TextViewContactName;
     TextView TextViewContactPhone;
     String contactPayload;
+    WritingAnimationFragment animateFragment;
 
     public wContactFragment() {
     }
@@ -46,6 +47,10 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
         TextViewContactPhone   = (TextView)rootView.findViewById(R.id.textView_ContactPhone);
         chooseContactButton.setOnClickListener(this);
         wContactButton.setOnClickListener(this);
+        animateFragment = new WritingAnimationFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.animation_frame, animateFragment)
+                .commit();
         return rootView;
     }
 
@@ -74,6 +79,7 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
             }
             case R.id.button_wcontact:{
                 if(contactPayload!=null){
+                    animateFragment.startAnimation();
                     iface.writeKontakt(contactPayload);
                 }
                 else{ iface.showToast("Kein Kontakt gewählt!");}

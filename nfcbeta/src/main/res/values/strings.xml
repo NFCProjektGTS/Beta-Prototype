@@ -20,6 +20,7 @@
     <string name="title_section7">Text</string>
     <string name="title_section8">URL</string>
     <string name="version">0.0</string>
+    <string name="text_Info">Diese App entstand im Rahmen eines Firmenprojektes an den Gewerbich-technischen-Schulen Offenbach im Auftrag von Accenture Holding GmbH und Co KG. Stellvertreter der Firma ist Theresa Bihn und Projektleiter Noli Morina.</string>
 
     <array name="dialog_write_opts">
         <item>Kontakt</item>

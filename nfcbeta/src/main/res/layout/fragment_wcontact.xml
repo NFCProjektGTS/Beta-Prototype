@@ -36,4 +36,10 @@
         android:text="Schreibe Kontakt"
         android:id="@+id/button_wcontact"
         android:layout_gravity="center_horizontal" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/animation_frame">
+    </FrameLayout>
 </LinearLayout>

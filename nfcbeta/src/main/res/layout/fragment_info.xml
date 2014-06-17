@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Diese App entstand im Rahmen eines Firmenprojektes an den Gewerbich-technischen-Schulen Offenbach im Auftrag von Accenture Holding GmbH und Co KG. Stellvertreter der Firma ist Theresa Bihn und Projektleiter Noli Morina."
+        android:text="@string/text_Info"
         android:id="@+id/Info_infotext"
         android:layout_below="@+id/info_version"
         android:layout_alignParentLeft="true"

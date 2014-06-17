@@ -21,6 +21,7 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     EditText wurlEditText;
+    WritingAnimationFragment animateFragment;
 
     public wURLFragment() {
     }
@@ -40,6 +41,12 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
         Button wurlButton =(Button) rootView.findViewById(R.id.button_wURL);
         wurlEditText   = (EditText)rootView.findViewById(R.id.editText_wURL);
         wurlButton.setOnClickListener(this);
+
+        animateFragment = new WritingAnimationFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.animation_frame, animateFragment)
+                .commit();
+
         return rootView;
     }
 
@@ -54,8 +61,8 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case  R.id.button_wURL: {
-               // new WritingAnimationFragment().startAnimation();
-                //iface = new InterfaceUI(getActivity());
+
+                animateFragment.startAnimation();
                 iface.writeURL(wurlEditText.getText().toString());
                 break;
             }
