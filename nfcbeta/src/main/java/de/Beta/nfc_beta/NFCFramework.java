@@ -316,7 +316,7 @@ public class NFCFramework {
                         break;
                     case 1006:
                         Toast.makeText(caller, "Text Tag detected! show Text", Toast.LENGTH_SHORT).show();
-                        Operations.initText(rec);//TODO TEXT AUF TAG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        Operations.initText(rec);
                         break;
                     default:
                         //

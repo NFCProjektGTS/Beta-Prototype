@@ -23,6 +23,7 @@ public class Operations {
     }
 
     public static void initImage(NdefRecord msg) {
+        byte[] payload = msg.getPayload();
 
     }
 

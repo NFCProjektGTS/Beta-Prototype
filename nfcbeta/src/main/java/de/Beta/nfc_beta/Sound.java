@@ -1,7 +1,6 @@
 package de.Beta.nfc_beta;
 
 import android.content.Context;
-import android.content.Loader;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -13,8 +12,9 @@ import java.io.IOException;
  */
 public class Sound {
     AssetManager am;
-    private int streamID;
     SoundPool sp;
+    private int streamID;
+
     Sound(Context ctx){
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         am = ctx.getAssets();
