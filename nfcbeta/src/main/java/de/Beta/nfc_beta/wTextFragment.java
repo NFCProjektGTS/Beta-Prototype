@@ -63,6 +63,7 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case  R.id.button_wtext: {
+                animateFragment.loadNfcAnimation();
                 animateFragment.startAnimation();
                 iface.writeText(wtextEditText.getText().toString());
                 //animateFragment.stopAnimation();
