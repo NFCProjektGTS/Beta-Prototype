@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class InterfaceUI {
     private final int ACTIVITY_CHOOSE_FILE = 1;
-    Sound msound = new Sound();
+    Sound sound = MainActivity.sound;
     Activity mContext;
     NFCFramework framework;
     DebugFragment df = MainActivity.df;
@@ -132,9 +132,7 @@ public class InterfaceUI {
 
     }
 
-    public void TagBildAnzeigen(){
-        ((MainActivity) mContext).PFragment.BildAnzeigen();
-    }
+
 
 
 

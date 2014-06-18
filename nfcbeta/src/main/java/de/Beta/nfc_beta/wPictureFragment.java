@@ -83,7 +83,6 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
                     iface.writePicture(selectedPicture);
                 }
                 MainActivity.showPictureFragment("clecle.jpg");
-                iface.TagBildAnzeigen();
                 break;
             }
         }

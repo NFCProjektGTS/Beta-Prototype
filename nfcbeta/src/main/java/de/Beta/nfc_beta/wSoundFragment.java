@@ -33,7 +33,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     private String selectedSound;
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
-    Sound msound = new Sound();
+    Sound sound =MainActivity.sound;
 
     public wSoundFragment() {
     }
@@ -104,7 +104,8 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         selectedSound = soundList.get(i);
-        msound.soundAbspielen("assets\sounds"+selectedSound);
+        String filename=selectedSound.replace(".ogg","");
+        sound.soundAbspielen(filename);
     }
 }
 

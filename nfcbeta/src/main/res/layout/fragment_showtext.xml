@@ -13,4 +13,5 @@
         android:id="@+id/textView_TextTagContent"
         android:layout_weight="0.39"
         android:textColor="#ff114600" />
+
 </LinearLayout>

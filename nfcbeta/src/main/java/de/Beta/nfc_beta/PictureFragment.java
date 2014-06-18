@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -24,8 +25,7 @@ public class PictureFragment  extends Fragment {
     public static PictureFragment newInstance(String picture) {
         PictureFragment fragment = new PictureFragment();
         Bundle args = new Bundle();
-       // args.putString(PICTURE, picture);
-        args.putString(PICTURE, "potter");
+        args.putString(PICTURE, picture);
         fragment.setArguments(args);
         pFragment = fragment;
         return fragment;
@@ -40,57 +40,21 @@ public class PictureFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_showpicture, container, false);
         TagPictureViewer = (ImageView) rootView.findViewById(R.id.imageView_TagPicture);
+        InputStream ims = null;
+        System.out.println(getArguments().getString(PICTURE));
+        try {
+            ims = getActivity().getAssets().open("pictures/"+getArguments().getString(PICTURE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Drawable d = Drawable.createFromStream(ims, null);
+        TagPictureViewer.setImageDrawable(d);
 
-        //TODO HIER DAS BILD IN DIE BILDANZEIGE LADEN
-        //BSP: so würde es mit text gehen, aber hier kommt die Bildanzeige rein
-        //tagcontentView   = (TextView)rootView.findViewById(R.id.textView_TextTagContent);
-        //tagcontentView.setText("Auf dem Tag befindet sich der Text: "+getArguments().getString(PICTURE));
         return rootView;
     }
 
-    public void BildAnzeigen(){
-        BildAnzeigen(pFragment);
-        //ImageView imgResBilder = (ImageView) this.getView().findViewById(R.id.imageViewResBilder);
-        //imgResBilder.
 
-        //this.onCreateView(R.id.scrollViewBilder);
-        //bilderList.
 
-        if((PICTURE!=null)){
-
-            try{
-                InputStream iS = getActivity().getAssets().open("pictures/"+PICTURE);
-                Drawable d = Drawable.createFromStream(iS,null);
-                TagPictureViewer.setImageDrawable(d);
-            }
-            catch(Exception e){
-
-            }
-
-        }
-    }
-
-    public void BildAnzeigen(PictureFragment pF){
-
-        //ImageView imgResBilder = (ImageView) this.getView().findViewById(R.id.imageViewResBilder);
-        //imgResBilder.
-
-        //this.onCreateView(R.id.scrollViewBilder);
-        //bilderList.
-
-        if((PICTURE!=null)){
-
-            try{
-                InputStream iS = getActivity().getAssets().open("pictures/"+PICTURE);
-                Drawable d = Drawable.createFromStream(iS,null);
-                TagPictureViewer.setImageDrawable(d);
-            }
-            catch(Exception e){
-
-            }
-
-        }
-    }
 
 
     @Override

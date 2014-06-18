@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 
 
 public class MainActivity extends ActionBarActivity
-   implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /* Activity Result Codes*/
     public static final int RQS_PICK_CONTACT = 2;
@@ -31,13 +31,12 @@ public class MainActivity extends ActionBarActivity
     public static wContactFragment wcf;
     public static wTextFragment wtf;
     public static wPictureFragment wpf;
-    public static PictureFragment PFragment;
     public static wSoundFragment wsf;
     public static wURLFragment wuf;
     public static FragmentManager fragmentManager;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-
+    public static Sound sound;
 
     @Override
     protected void onStop() {
@@ -69,34 +68,21 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
 
-
+        sound = new Sound(this.getApplicationContext());
         df = new DebugFragment();
         wcf = wContactFragment.newInstance(5);
         wpf = wPictureFragment.newInstance(7);
         wsf = wSoundFragment.newInstance(8);
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
-        PFragment = PictureFragment.newInstance(pictureName);
         iface = new InterfaceUI(this);
         //framework = new NFCFramework(this, iface);
 
 
-    }
-
-    private String pictureName ="potter";
-    public static void showPictureFragment(String pictureName){
-        pictureName = pictureName;
-        //PFragment = new PictureFragment().newInstance(pictureName);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PFragment)
-                .commit();
-        //PFragment.BildAnzeigen();
 
 
 
     }
-
-
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -150,7 +136,23 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+    public static void showPictureFragment(String pictureName){
 
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PictureFragment.newInstance(pictureName))
+                .commit();
+
+    }
+    public static void showTextFragment(String text){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(text))
+                .commit();
+    }
+    public static void showSoundFragment(String sound){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(sound))
+                .commit();
+    }
 
 
 
@@ -182,6 +184,17 @@ public class MainActivity extends ActionBarActivity
             case 10:
                 mTitle = getString(R.string.title_section8);
                 break;
+            case 101:
+                mTitle= "Bildanzeige";//für show Picture Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
+                break;
+            case 102:
+                mTitle= "Textanzeige";//für show Text Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
+                break;
+            case 103:
+                mTitle= "Soundplayer";//für show Sound Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
         }
     }
 
