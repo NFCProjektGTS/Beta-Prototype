@@ -41,8 +41,8 @@ public class WritingAnimationFragment extends Fragment {
 
     public void loadNfcAnimation() {
         images.clear();
-        images.add((ImageView) this.getView().findViewById(R.id.imgViewTag));
-        images.add((ImageView) this.getView().findViewById(R.id.imgViewHandy));
+        images.add((ImageView) this.getView().findViewById(R.id.imgViewTag));       //load Tag image into array list
+        images.add((ImageView) this.getView().findViewById(R.id.imgViewHandy));     //load Handy image into array list
     }
 
 

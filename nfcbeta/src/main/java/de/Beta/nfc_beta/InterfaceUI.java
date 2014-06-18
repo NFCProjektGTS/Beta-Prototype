@@ -2,12 +2,10 @@ package de.Beta.nfc_beta;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -117,17 +115,6 @@ public class InterfaceUI {
 
     public void chooseContact() {
         mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 2); //2 == RQS_PICK_CONTACT
-    }
-
-
-
-
-    public void playSound() {
-
-    }
-
-    public void pauseSound() {
-
     }
 
 

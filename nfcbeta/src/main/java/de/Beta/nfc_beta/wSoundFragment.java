@@ -29,12 +29,12 @@ import java.util.Collections;
  * A placeholder fragment containing a simple view.
  */
 public class wSoundFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
-    private ArrayList<String> soundList;
-    private ListView listViewSound;
-    private String selectedSound;
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     Sound sound =MainActivity.sound;
+    private ArrayList<String> soundList;
+    private ListView listViewSound;
+    private String selectedSound;
 
     public wSoundFragment() {
     }
@@ -88,17 +88,10 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     }
 
 
-    public void setSoundList(String[] soundNames){
-
-
-    }
-
-
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //selectedSound = soundList.get(i);
-
-        sound.soundAbspielen(soundList.get(i));
+        selectedSound = soundList.get(i); //TODO this just worked
+        //sound.soundAbspielen(soundList.get(i));
         //sound.soundAbspielen("door.mp3");
     }
 }
