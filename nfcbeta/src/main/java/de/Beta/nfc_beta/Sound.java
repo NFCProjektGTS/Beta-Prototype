@@ -1,6 +1,7 @@
 package de.Beta.nfc_beta;
 
 import android.content.Context;
+import android.content.Loader;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -17,20 +18,31 @@ public class Sound {
     Sound(Context ctx){
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         am = ctx.getAssets();
+
     }
 
 
     // Methoden
     // Methode zum Sound abspielen, String filename ist der Dateiname
     public void soundAbspielen(String filename) {
-        int soundID = 0;
+
         try {
 
-            soundID = sp.load(am.openFd("sounds/"+filename), 1);
+            final int soundID = sp.load(am.openFd("sounds/"+filename), 1);
+            SoundPool.OnLoadCompleteListener loadcop =new SoundPool.OnLoadCompleteListener(){
+
+
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int i, int i2) {
+                    streamID = sp.play(soundID, 1, 1, 1, 0, 1);
+                }
+            };
+            sp.setOnLoadCompleteListener( loadcop);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int streamID = sp.play(soundID, 1, 1, 1, 0, 1);
+
+
     }
     // Methode zum Sound pausieren
     public void soundPausieren() {

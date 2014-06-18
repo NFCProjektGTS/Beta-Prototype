@@ -75,20 +75,13 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
                 break;
             }
             case  R.id.button_wSound: {
-                iface.writeSound("soundfile.oog");
+                System.out.println(selectedSound);
+                iface.writeSound(selectedSound);
                 break;
             }
         }
     }
-    //wenn die Sound Seite verlassen wird hört der Sound auf zu spielen
-    @Override
-    public void onPause() {
-        super.onPause();
-        //boolean offen = Fragment.isDetached();
-        //if(offen == true) {
-        //    msound.soundPausieren();
-        //}
-    }
+
 
     public void setSoundList(String[] soundNames){
         this.soundList = new ArrayList<String>();
@@ -103,9 +96,10 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedSound = soundList.get(i);
-        String filename=selectedSound.replace(".ogg","");
-        sound.soundAbspielen(filename);
+        //selectedSound = soundList.get(i);
+
+        sound.soundAbspielen(soundList.get(i));
+        //sound.soundAbspielen("door.mp3");
     }
 }
 

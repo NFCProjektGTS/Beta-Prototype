@@ -39,7 +39,6 @@ public class SoundFragment  extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
-        super.onAttach(activity);
         super.onAttach(activity);((MainActivity)activity).onSectionAttached(103);//SWITCH CASE FÜR SOUND
     }
 

@@ -46,7 +46,6 @@ public class InterfaceUI {
 
 
     public void writeStummschalten() {
-        //framework.setPayload(OpCodes.OPC_SILENT); braucht man nicht
         if (framework != null) {
             framework.createWriteNdef(NdefCreator.muteMessage());
             framework.enableWrite();
