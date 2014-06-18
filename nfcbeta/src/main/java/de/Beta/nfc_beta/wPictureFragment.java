@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     private ArrayList<String> imageList;
+    private ArrayList<String> imagefilenameList;
     private ListView listViewPictures;
     private String selectedPicture;
     private ImageView selectedPictureViewer;
@@ -49,16 +51,33 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
         View rootView = inflater.inflate(R.layout.fragment_wpicture, container, false);
 
 
-        Button choosePictureButton =(Button) rootView.findViewById(R.id.button_choosePicture);
-        choosePictureButton.setOnClickListener(this);
-
         Button wPictureButton =(Button) rootView.findViewById(R.id.button_wPicture);
         wPictureButton.setOnClickListener(this);
 
         listViewPictures = (ListView) rootView.findViewById(R.id.listView_pictures);
         listViewPictures.setOnItemClickListener(this);
 
-        selectedPictureViewer = (ImageView) rootView.findViewById(R.id.imageView_selectedPicture);
+        try {
+            String[] imageFilenamesNames = getActivity().getApplicationContext().getAssets().list("pictures");
+            String[] imageNames = new String[imageFilenamesNames.length];
+
+            for (int i =0; i<imageNames.length;i++){
+                imageNames[i]=imageFilenamesNames[i].replace(".jpg","");
+            }
+            imageList = new ArrayList<String>();
+            imagefilenameList = new ArrayList<String>();
+            Collections.addAll(imagefilenameList,imageFilenamesNames);
+            Collections.addAll(imageList, imageNames);
+
+
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist,this.imageList);
+            listViewPictures.setAdapter(listAdapter);
+
+            selectedPictureViewer = (ImageView) rootView.findViewById(R.id.imageView_selectedPicture);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         return rootView;
     }
@@ -74,15 +93,11 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
     public void onClick(View view) {
         //iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
-            case  R.id.button_choosePicture: {
-                iface.choosePicture();
-                break;
-            }
             case  R.id.button_wPicture: {
                 if(selectedPicture!=null){
                     iface.writePicture(selectedPicture);
                 }
-                MainActivity.showPictureFragment("clecle.jpg");
+                //MainActivity.showPictureFragment("clecle.jpg");
                 break;
             }
         }
@@ -93,7 +108,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
 
         switch (parent.getId()) {
             case R.id.listView_pictures:{
-                selectedPicture = imageList.get(position);
+                selectedPicture = imagefilenameList.get(position);
                 showSelectedPicture();
 
             }
@@ -112,16 +127,6 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
             }
 
         }
-    }
-
-    public void setImageList(String[] imageNames){
-        this.imageList = new ArrayList<String>();
-        Collections.addAll(imageList, imageNames);
-
-
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.debuglist,this.imageList);
-        listViewPictures.setAdapter(listAdapter);
-
     }
 
 

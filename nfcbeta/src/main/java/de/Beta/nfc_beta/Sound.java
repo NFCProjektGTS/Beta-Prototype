@@ -37,7 +37,7 @@ public class Sound {
                     streamID = sp.play(soundID, 1, 1, 1, 0, 1);
                 }
             };
-            sp.setOnLoadCompleteListener( loadcop);
+            sp.setOnLoadCompleteListener(loadcop);
         } catch (IOException e) {
             e.printStackTrace();
         }

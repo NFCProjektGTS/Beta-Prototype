@@ -119,29 +119,8 @@ public class InterfaceUI {
         mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 2); //2 == RQS_PICK_CONTACT
     }
 
-    public void choosePicture() {
-        try {
-            String[] ourPictures = mContext.getAssets().list("pictures");
-            ((MainActivity) mContext ).wpf.setImageList(ourPictures);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // coose from ressources
-
-    }
 
 
-
-
-
-    // Sound Methoden
-    public void chooseSound() {
-
-
-        // coose from ressources
-
-    }
 
     public void playSound() {
 

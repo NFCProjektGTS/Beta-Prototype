@@ -51,9 +51,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wsound, container, false);
-        Button chooseSoundButton =(Button) rootView.findViewById(R.id.button_chooseSound);
         Button wSoundButton =(Button) rootView.findViewById(R.id.button_wSound);
-        chooseSoundButton.setOnClickListener(this);
         wSoundButton.setOnClickListener(this);
         listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
         listViewSound.setOnItemClickListener(this);
@@ -62,14 +60,11 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);
-            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.debuglist,soundList);
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist,soundList);
             listViewSound.setAdapter(listAdapter);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
         return rootView;
     }
 
@@ -84,10 +79,6 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     public void onClick(View view) {
         //iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
-            case  R.id.button_chooseSound: {
-                iface.chooseSound();
-                break;
-            }
             case  R.id.button_wSound: {
                 System.out.println(selectedSound);
                 iface.writeSound(selectedSound);

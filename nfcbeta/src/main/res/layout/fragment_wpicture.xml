@@ -2,24 +2,21 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:weightSum="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bild auswählen"
-        android:id="@+id/button_choosePicture"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
         android:id="@+id/listView_pictures"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.10"
-        android:textSize="50sp"/>
+
+
+        android:background="#ffc8c8c8"/>
 
     <ImageView
         android:layout_width="150dp"
