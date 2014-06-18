@@ -10,7 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -21,7 +27,10 @@ import android.widget.Button;
 /**
  * A placeholder fragment containing a simple view.
  */
-public  class wSoundFragment extends Fragment implements View.OnClickListener{
+public class wSoundFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
+    private ArrayList<String> soundList;
+    private ListView listViewSound;
+    private String selectedSound;
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     Sound msound = new Sound();
@@ -46,6 +55,9 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
         chooseSoundButton.setOnClickListener(this);
         wSoundButton.setOnClickListener(this);
         return rootView;
+        listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
+        listViewSound.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -79,7 +91,21 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
         //}
     }
 
+    public void setSoundList(String[] soundNames){
+        this.soundList = new ArrayList<String>();
+        Collections.addAll(soundList, soundNames);
 
+
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.debuglist,this.soundList);
+        listViewSound.setAdapter(listAdapter);
+
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
 }
 
 
