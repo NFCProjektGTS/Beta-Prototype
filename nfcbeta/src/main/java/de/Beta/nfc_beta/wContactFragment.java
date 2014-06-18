@@ -81,6 +81,8 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
                 if(contactPayload!=null){
                     animateFragment.startAnimation();
                     iface.writeKontakt(contactPayload);
+                    //if(iface.)
+                    //animateFragment.stopAnimation();
                 }
                 else{ iface.showToast("Kein Kontakt gewählt!");}
                 break;

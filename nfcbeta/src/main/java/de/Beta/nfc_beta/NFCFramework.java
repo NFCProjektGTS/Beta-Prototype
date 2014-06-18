@@ -127,6 +127,7 @@ public class NFCFramework {
                 wTAG = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 if (wTAG != null && mWriteNdef[0] != null) {
                     wai.printDebugInfo(OnTagWriteListener.onTagWrite(writeTag(wTAG, mWriteNdef[0])));
+
                 }
             }
         }

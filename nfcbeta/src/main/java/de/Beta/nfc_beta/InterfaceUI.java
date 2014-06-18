@@ -132,6 +132,12 @@ public class InterfaceUI {
 
     }
 
+    public void TagBildAnzeigen(){
+        ((MainActivity) mContext).PFragment.BildAnzeigen();
+    }
+
+
+
     // Sound Methoden
     public void chooseSound() {
         try {
