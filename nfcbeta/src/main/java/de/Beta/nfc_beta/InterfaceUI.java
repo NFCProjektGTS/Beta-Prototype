@@ -70,20 +70,21 @@ public class InterfaceUI {
         mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
     }
 
-    public void writePicture(String pictureFillName) {
+    public void writePicture(String pictureFileName) {
         if (framework != null) {
-            //select image dialog
+            if (!framework.getPayload().equals("")) {
+                framework.createWriteNdef(NdefCreator.ImageMessage(pictureFileName));
+                framework.enableWrite();
+            }
         }
     }
 
-    public void writeSound() {
+    public void writeSound(String soundFileName) {
         if (framework != null) {
-            // first get soundd
-            // second create NdefMessage with sounddata
-            // third setPayload
-            //framework.setPayload(Operations.OPC_SOUND_01);
-            //framework.createWriteNdef(NdefCreator.Sound01Message());
-            //framework.enableWrite();
+            if (!framework.getPayload().equals("")) {
+                framework.createWriteNdef(NdefCreator.SoundMessage(soundFileName));
+                framework.enableWrite();
+            }
         }
     }
 
