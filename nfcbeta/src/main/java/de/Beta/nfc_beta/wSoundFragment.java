@@ -64,7 +64,7 @@ public  class wSoundFragment extends Fragment implements View.OnClickListener{
                 break;
             }
             case  R.id.button_wSound: {
-                iface.writeSound();
+                iface.writeSound("soundfile.oog");
                 break;
             }
         }

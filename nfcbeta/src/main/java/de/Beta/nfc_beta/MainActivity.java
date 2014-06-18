@@ -136,6 +136,12 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+    public static void showPictureFragment(String pictureName){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PictureFragment.newInstance("pictureName")) //TODO PICTURE NAME
+                .commit();
+    }
+
 
 
     public void onSectionAttached(int number) {

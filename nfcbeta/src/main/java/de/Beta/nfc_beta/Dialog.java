@@ -33,30 +33,6 @@ public class Dialog {
                         .setIcon(android.R.drawable.ic_notification_clear_all)
                         .show();
                 break;
-            case 1:
-                new AlertDialog.Builder(mContext)
-                        .setTitle(R.string.dialog_write)
-                        .setItems(R.array.dialog_write_opts, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                       // iface.writeKontakt();
-                                        break;
-                                    case 1:
-                                        iface.writeStummschalten();
-                                        break;
-                                    case 2:
-                                        iface.writePicture(null);
-                                        break;
-                                    case 3:
-                                        iface.writeSound();
-                                        break;
-                                }
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_menu_edit)
-                        .show();
-                break;
         }
 
     }
