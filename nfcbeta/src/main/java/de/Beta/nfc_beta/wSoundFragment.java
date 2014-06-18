@@ -54,10 +54,9 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
         Button wSoundButton =(Button) rootView.findViewById(R.id.button_wSound);
         chooseSoundButton.setOnClickListener(this);
         wSoundButton.setOnClickListener(this);
-        return rootView;
         listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
         listViewSound.setOnItemClickListener(this);
-
+        return rootView;
     }
 
     @Override

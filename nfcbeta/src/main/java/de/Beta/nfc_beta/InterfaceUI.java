@@ -135,7 +135,7 @@ public class InterfaceUI {
     // Sound Methoden
     public void chooseSound() {
         try {
-            String[] ourSound = mContext.getAssets().list("sound");
+            String[] ourSound = mContext.getAssets().list("sounds");
             ((MainActivity) mContext ).wsf.setSoundList(ourSound);
 
         } catch (IOException e) {
