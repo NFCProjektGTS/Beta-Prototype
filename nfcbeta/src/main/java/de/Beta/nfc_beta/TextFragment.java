@@ -47,6 +47,6 @@ public  class TextFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        super.onAttach(activity);((MainActivity)activity).onSectionAttached(102);//SWITCH CASE FÜR TEXT
     }
-    //getArguments().getInt(ARG_SECTION_NUMBER));
 }

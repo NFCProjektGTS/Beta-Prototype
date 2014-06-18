@@ -137,8 +137,20 @@ public class MainActivity extends ActionBarActivity
     }
 
     public static void showPictureFragment(String pictureName){
+
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PictureFragment.newInstance("pictureName")) //TODO PICTURE NAME
+                .replace(R.id.container, PictureFragment.newInstance(pictureName))
+                .commit();
+
+    }
+    public static void showTextFragment(String text){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(text))
+                .commit();
+    }
+    public static void showSoundFragment(String sound){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(sound))
                 .commit();
     }
 
@@ -172,6 +184,17 @@ public class MainActivity extends ActionBarActivity
             case 10:
                 mTitle = getString(R.string.title_section8);
                 break;
+            case 101:
+                mTitle= "Bildanzeige";//für show Picture Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
+                break;
+            case 102:
+                mTitle= "Textanzeige";//für show Text Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
+                break;
+            case 103:
+                mTitle= "Soundplayer";//für show Sound Fragment, nicht auswählbar von dem Drawer
+                restoreActionBar();
         }
     }
 
