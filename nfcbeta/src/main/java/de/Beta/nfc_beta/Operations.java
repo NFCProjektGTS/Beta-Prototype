@@ -18,18 +18,17 @@ public class Operations {
     }
 
     public static void initSound(NdefRecord msg) {
-
-
+        MainActivity.showSoundFragment(new String(msg.getPayload()));
+        //TODO TOAST?
     }
 
     public static void initImage(NdefRecord msg) {
-        byte[] payload = msg.getPayload();
-
+        MainActivity.showPictureFragment(new String(msg.getPayload()));
+        //TODO TOAST?
     }
 
     public static void initText(NdefRecord msg) {
-
-        TextFragment t = TextFragment.newInstance(new String(msg.getPayload()));
-        MainActivity.fragmentManager.beginTransaction().replace(R.id.container,  t).commit();
+        MainActivity.showTextFragment(new String(msg.getPayload()));
+        //TODO TOAST?
     }
 }

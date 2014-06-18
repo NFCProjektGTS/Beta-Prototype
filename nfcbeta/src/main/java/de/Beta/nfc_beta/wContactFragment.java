@@ -79,6 +79,7 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
             }
             case R.id.button_wcontact:{
                 if(contactPayload!=null){
+                    animateFragment.loadNfcAnimation();
                     animateFragment.startAnimation();
                     iface.writeKontakt(contactPayload);
                     //if(iface.)

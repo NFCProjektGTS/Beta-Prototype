@@ -15,15 +15,15 @@ public class SoundFragment  extends Fragment {
 
     private static final String SOUND = "section_number";
 
-    public static SoundFragment  newInstance(String sound) {
-        SoundFragment  fragment = new SoundFragment ();
+    public SoundFragment() {
+    }
+
+    public static SoundFragment newInstance(String sound) {
+        SoundFragment fragment = new SoundFragment();
         Bundle args = new Bundle();
         args.putString(SOUND, sound);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public SoundFragment () {
     }
 
     @Override
@@ -42,6 +42,10 @@ public class SoundFragment  extends Fragment {
         super.onAttach(activity);((MainActivity)activity).onSectionAttached(103);//SWITCH CASE FÜR SOUND
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
 }
 
 
