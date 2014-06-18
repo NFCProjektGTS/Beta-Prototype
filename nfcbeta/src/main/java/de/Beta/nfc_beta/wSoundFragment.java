@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -56,6 +57,19 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
         wSoundButton.setOnClickListener(this);
         listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
         listViewSound.setOnItemClickListener(this);
+
+        try {
+            String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
+            soundList = new ArrayList<String>();
+            Collections.addAll(soundList, soundNames);
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.debuglist,soundList);
+            listViewSound.setAdapter(listAdapter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
         return rootView;
     }
 
@@ -84,12 +98,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
 
 
     public void setSoundList(String[] soundNames){
-        this.soundList = new ArrayList<String>();
-        Collections.addAll(soundList, soundNames);
 
-
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.debuglist,this.soundList);
-        listViewSound.setAdapter(listAdapter);
 
     }
 
