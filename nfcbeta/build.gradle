@@ -4,7 +4,7 @@ android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
     defaultConfig {
-        packageName "de.Beta.nfc_beta"
+        applicationId "de.Beta.nfc_beta"
         minSdkVersion 11
         targetSdkVersion 19
         versionCode 1

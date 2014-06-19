@@ -2,6 +2,7 @@ package de.Beta.nfc_beta;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 
 
@@ -33,6 +34,21 @@ public class Dialog {
                         .setIcon(android.R.drawable.ic_notification_clear_all)
                         .show();
                 break;
+            case 1:
+                WritingAnimationFragment animateFragment;
+                animateFragment = new WritingAnimationFragment();
+                MainActivity.fragmentManager.beginTransaction()
+                        .replace(R.id.animation_frame,animateFragment)
+                        .commit();
+                //animateFragment.loadNfcAnimation();   TODO
+                //animateFragment.startAnimation();     TODO
+                new AlertDialog.Builder(mContext)
+                        .setTitle("NFC Tag beschreiben")
+                        .setView(mContext.getLayoutInflater().inflate(R.layout.dialog_wanimation, null))
+                        .setCancelable(false)
+                        .show();
+
+            break;
         }
 
     }
