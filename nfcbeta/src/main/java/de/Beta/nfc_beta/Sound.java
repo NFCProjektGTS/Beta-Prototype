@@ -21,6 +21,8 @@ public class Sound {
 
     }
 
+   Sound(){};
+
 
     // Methoden
     // Methode zum Sound abspielen, String filename ist der Dateiname
