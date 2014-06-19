@@ -57,6 +57,7 @@ public  class wURLFragment extends Fragment implements View.OnClickListener{
                 getArguments().getInt(ARG_SECTION_NUMBER));
         iface = MainActivity.iface;
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

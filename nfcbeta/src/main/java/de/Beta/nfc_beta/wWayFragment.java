@@ -17,7 +17,7 @@ import android.view.ViewGroup;
  */
 
 
-public  class wWayFragment extends Fragment {
+public class wWayFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static InterfaceUI iface;
@@ -46,6 +46,21 @@ public  class wWayFragment extends Fragment {
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
         iface = MainActivity.iface;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_wWay: {
+                System.out.println("wWay");
+                break;
+            }
+        }
     }
 }
 
