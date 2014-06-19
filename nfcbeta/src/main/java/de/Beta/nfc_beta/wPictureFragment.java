@@ -97,6 +97,8 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
                 if(selectedPicture!=null){
                     iface.writePicture(selectedPicture);
                     //TODO animation when list is hidden
+                } else {
+                    iface.showToast("Kein Bild ausgewählt!");
                 }
                 //MainActivity.showPictureFragment("clecle.jpg");
                 break;

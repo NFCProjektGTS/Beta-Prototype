@@ -27,7 +27,7 @@ public class InterfaceUI {
 
 
     void showToast(String text) {
-        Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
     }
 
     public void printDebugInfo(String text) {

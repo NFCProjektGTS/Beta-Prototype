@@ -22,8 +22,8 @@ public class MainActivity extends ActionBarActivity
 
     /* Activity Result Codes*/
     public static final int RQS_PICK_CONTACT = 2;
-    public static final int RQS_PICK_SOUND = 3;
-    public static final int RQS_PICK_IMAGE = 4;
+    //public static final int RQS_PICK_SOUND = 3;
+    //public static final int RQS_PICK_IMAGE = 4;
 
     public static NFCFramework framework;
     public static InterfaceUI iface;
@@ -34,9 +34,30 @@ public class MainActivity extends ActionBarActivity
     public static wSoundFragment wsf;
     public static wURLFragment wuf;
     public static FragmentManager fragmentManager;
+    public static Sound sound;
+    public static AnimationPopUpWindow popup;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-    public static Sound sound;
+
+    public static void showPictureFragment(String pictureName) {
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PictureFragment.newInstance(pictureName))
+                .commit();
+
+    }
+
+    public static void showTextFragment(String text) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(text))
+                .commit();
+    }
+
+    public static void showSoundFragment(String sound) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, TextFragment.newInstance(sound))
+                .commit();
+    }
 
     @Override
     protected void onStop() {
@@ -76,6 +97,7 @@ public class MainActivity extends ActionBarActivity
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
         iface = new InterfaceUI(this);
+        popup = new AnimationPopUpWindow(this);
         //framework = new NFCFramework(this, iface);
 
 
@@ -88,7 +110,7 @@ public class MainActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        switch (position+1){
+        switch (position + 1) {
             //SKIP 1 weil überschrift NFC-Beta
             case 2:
                 fragmentManager.beginTransaction()
@@ -103,7 +125,7 @@ public class MainActivity extends ActionBarActivity
             //SKIP 4 weil überschrift Schreiben
             case 5:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container,wcf)
+                        .replace(R.id.container, wcf)
                         .commit();
                 break;
             case 6:
@@ -135,26 +157,6 @@ public class MainActivity extends ActionBarActivity
         }
 
     }
-
-    public static void showPictureFragment(String pictureName){
-
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PictureFragment.newInstance(pictureName))
-                .commit();
-
-    }
-    public static void showTextFragment(String text){
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, TextFragment.newInstance(text))
-                .commit();
-    }
-    public static void showSoundFragment(String sound){
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, TextFragment.newInstance(sound))
-                .commit();
-    }
-
-
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -290,14 +292,14 @@ public class MainActivity extends ActionBarActivity
                     Toast.makeText(this, "Failure result, could not load Contact.", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case RQS_PICK_SOUND:
+            /*case RQS_PICK_SOUND:
                 // sound zum schreiben vorbereiten
                 break;
             case RQS_PICK_IMAGE:
                 // image zum schreiben vorbereiten
-                break;
+                break;*/
             default:
-                iface.printDebugWarn("Activity Result unknown!");
+                iface.printDebugError("Activity Result unknown!");
                 break;
         }
     }
