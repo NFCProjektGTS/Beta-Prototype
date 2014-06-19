@@ -44,15 +44,17 @@ public class InterfaceUI {
 
 
     public void writeStummschalten() {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             framework.createWriteNdef(NdefCreator.muteMessage());
             framework.enableWrite();
             printDebugInfo("Schreibe Stummschalten");
+        } else {
+            showToast("Unable to use NFC");
         }
     }
 
     public void writeKontakt(String payload) {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             framework.setPayload(payload);
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
@@ -60,6 +62,8 @@ public class InterfaceUI {
             }
             //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
             printDebugInfo("Schreibe Kontakt");
+        } else {
+            showToast("Unable to use NFC");
         }
     }
 
@@ -68,37 +72,43 @@ public class InterfaceUI {
     }
 
     public void writePicture(String pictureFileName) {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.ImageMessage(pictureFileName));
                 framework.enableWrite();
+            } else {
+                showToast("Unable to use NFC");
             }
         }
     }
 
     public void writeSound(String soundFileName) {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.SoundMessage(soundFileName));
                 framework.enableWrite();
+            } else {
+                showToast("Unable to use NFC");
             }
         }
     }
 
 
     public void writeText(String s) {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             printDebugInfo("Schreibe Text: " + s);
             framework.setPayload(s);
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
                 framework.enableWrite();
+            } else {
+                showToast("Unable to use NFC");
             }
         }
     }
 
     public void writeURL(String s) {
-        if (framework != null) {
+        if (framework != null && framework.isEnabled()) {
             try {
                 URL url = new URL(s);
                 printDebugInfo("Schreibe URL: " + s);
@@ -110,6 +120,8 @@ public class InterfaceUI {
             } catch (MalformedURLException e) {
                 printDebugError("URL: " + s + " malformed!");
             }
+        } else {
+            showToast("Unable to use NFC");
         }
     }
 

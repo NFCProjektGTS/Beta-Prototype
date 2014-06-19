@@ -96,6 +96,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
             case  R.id.button_wPicture: {
                 if(selectedPicture!=null){
                     iface.writePicture(selectedPicture);
+                    //TODO animation when list is hidden
                 }
                 //MainActivity.showPictureFragment("clecle.jpg");
                 break;
@@ -123,7 +124,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
                 selectedPictureViewer.setImageDrawable(d);
             }
             catch(Exception e){
-
+                e.printStackTrace();
             }
 
         }

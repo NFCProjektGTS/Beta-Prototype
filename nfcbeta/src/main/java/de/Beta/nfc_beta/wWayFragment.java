@@ -46,6 +46,7 @@ public class wWayFragment extends Fragment implements View.OnClickListener {
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
         iface = MainActivity.iface;
+        // set up button
     }
 
     @Override

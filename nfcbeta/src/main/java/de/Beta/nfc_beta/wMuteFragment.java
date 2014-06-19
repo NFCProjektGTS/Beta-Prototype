@@ -52,15 +52,13 @@ public  class wMuteFragment extends Fragment implements View.OnClickListener {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
-
+        iface = MainActivity.iface;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case  R.id.button_wmute: {
-                iface = MainActivity.iface;
-                //iface = new InterfaceUI(getActivity());
                 iface.writeStummschalten();
                 break;
             }

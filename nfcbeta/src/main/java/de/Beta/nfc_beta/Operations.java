@@ -19,16 +19,17 @@ public class Operations {
 
     public static void initSound(NdefRecord msg) {
         MainActivity.showSoundFragment(new String(msg.getPayload()));
-        //TODO TOAST?
+        //Start play sound
     }
 
     public static void initImage(NdefRecord msg) {
         MainActivity.showPictureFragment(new String(msg.getPayload()));
-        //TODO TOAST?
+
+        //Start display image
     }
 
     public static void initText(NdefRecord msg) {
         MainActivity.showTextFragment(new String(msg.getPayload()));
-        //TODO TOAST?
+        //Start display text
     }
 }

@@ -15,7 +15,6 @@ import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Parcelable;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -41,7 +40,6 @@ public class NFCFramework {
         this.wai = wai;
         this.wai.printDebugInfo("Initialzing NFC Framework");
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(caller);
-        this.enabled = checkNFC();
 
         if (enabled) wai.printDebugInfo("Adapter found: " + mNfcAdapter.toString());
 
@@ -85,18 +83,18 @@ public class NFCFramework {
         if (mNfcAdapter != null) {
             if (!mNfcAdapter.isEnabled()) {
                 wai.printDebugWarn("NFC is disabled");
+                wai.showToast("Please enable NFC in the settings");
                 new Dialog(caller, 0);
-                if (mNfcAdapter.isEnabled()) {
-
-                    return true;
-                }
             }
-
-            return true;
+            if (mNfcAdapter.isEnabled()) {
+                this.enabled = true;
+                return true;
+            }
         } else {
-            wai.showToast("NFC Hardware nicht gefunden");
-
+            wai.showToast("NFC Hardware nicht gefunden!");
+            wai.printDebugError("NFC Hardware nicht gefunden!");
         }
+        this.enabled = false;
         return false;
     }
 
@@ -126,7 +124,9 @@ public class NFCFramework {
                 this.wai.printDebugInfo("Writing");
                 wTAG = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 if (wTAG != null && mWriteNdef[0] != null) {
-                    wai.printDebugInfo(OnTagWriteListener.onTagWrite(writeTag(wTAG, mWriteNdef[0])));
+                    int code = writeTag(wTAG, mWriteNdef[0]);
+                    wai.printDebugInfo(OnTagWriteListener.onTagWrite(code));
+                    //TODO Close Animation if any open
 
                 }
             }
@@ -272,10 +272,10 @@ public class NFCFramework {
         if (enabled) {
             if (this.mWriteNdef != null) {
                 this.WriteMode = true;
-                Toast.makeText(caller, "Writemode enabled", Toast.LENGTH_SHORT).show();
+                wai.printDebugInfo("Writemode enabled");
                 wai.printDebugInfo("Please scan a NFC Tag to write on");
             } else {
-                wai.printDebugInfo("No Data specified!");
+                wai.printDebugWarn("No Data specified!");
             }
         }
     }
@@ -286,7 +286,7 @@ public class NFCFramework {
             this.mWriteNdef = null;
             this.WriteMode = false;
             this.payload = "";
-            Toast.makeText(caller, "Writemode disabled", Toast.LENGTH_SHORT).show();
+            wai.showToast("Writemode disabled");
         }
     }
 
@@ -296,27 +296,25 @@ public class NFCFramework {
                 switch (new BigInteger(rec.getType()).intValue()) {
                     case 1001:
                         Operations.toggleSilent(caller);
-                        Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        wai.showToast("Mute Tag detected! Toggle Audiostate.");
                         break;
                     case 1002:
                         //automatically handled in android os
                         break;
                     case 1003:
-                        //TODO set SoundFragmet to foreground => load and display image
                         Operations.initSound(rec);
-                        //Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        wai.showToast("Sound Tag detected! Play Sound.");
                         break;
                     case 1004:
-                        //TODO set ImageFragment to foreground => load and play sound
                         Operations.initImage(rec);
-                        //Toast.makeText(caller, "Mute Tag detected! Toggle Audiostate!", Toast.LENGTH_SHORT).show();
+                        wai.showToast("Image Tag detected! Display Image.");
                         break;
                     case 1005:
                         //placeholder
                         break;
                     case 1006:
-                        Toast.makeText(caller, "Text Tag detected! show Text", Toast.LENGTH_SHORT).show();
                         Operations.initText(rec);
+                        wai.showToast("Text Tag detected! Display Text");
                         break;
                     default:
                         //

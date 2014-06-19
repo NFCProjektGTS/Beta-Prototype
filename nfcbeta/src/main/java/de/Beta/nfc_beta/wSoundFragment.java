@@ -31,7 +31,7 @@ import java.util.Collections;
 public class wSoundFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
-    Sound sound =MainActivity.sound;
+    Sound sound = MainActivity.sound;
     private ArrayList<String> soundList;
     private ListView listViewSound;
     private String selectedSound;
@@ -51,7 +51,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wsound, container, false);
-        Button wSoundButton =(Button) rootView.findViewById(R.id.button_wSound);
+        Button wSoundButton = (Button) rootView.findViewById(R.id.button_wSound);
         wSoundButton.setOnClickListener(this);
         listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
         listViewSound.setOnItemClickListener(this);
@@ -60,7 +60,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);
-            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist,soundList);
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist, soundList);
             listViewSound.setAdapter(listAdapter);
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,13 +75,18 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
                 getArguments().getInt(ARG_SECTION_NUMBER));
         iface = MainActivity.iface;
     }
+
     @Override
     public void onClick(View view) {
         //iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
-            case  R.id.button_wSound: {
-                System.out.println(selectedSound);
-                iface.writeSound(selectedSound);
+            case R.id.button_wSound: {
+                if (selectedSound != null) {
+                    iface.writeSound(selectedSound);
+                    //animation
+                } else {
+                    iface.showToast("Kein Sound gewählt!");
+                }
                 break;
             }
         }

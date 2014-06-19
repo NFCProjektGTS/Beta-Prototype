@@ -14,14 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-
-
-public  class wTextFragment extends Fragment implements View.OnClickListener {
+public class wTextFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
     EditText wtextEditText;
-    WritingAnimationFragment animateFragment;
 
     public wTextFragment() {
     }
@@ -38,14 +35,10 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wtext, container, false);
-        Button wtextButton =(Button) rootView.findViewById(R.id.button_wtext);
-        wtextEditText   = (EditText)rootView.findViewById(R.id.editText_wtext);
+        Button wtextButton = (Button) rootView.findViewById(R.id.button_wtext);
+        wtextEditText = (EditText) rootView.findViewById(R.id.editText_wtext);
         wtextButton.setOnClickListener(this);
 
-        animateFragment = new WritingAnimationFragment();
-        getFragmentManager().beginTransaction()
-                .replace(R.id.animation_frame, animateFragment)
-                .commit();
 
         return rootView;
     }
@@ -62,9 +55,7 @@ public  class wTextFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case  R.id.button_wtext: {
-                animateFragment.loadNfcAnimation();
-                animateFragment.startAnimation();
+            case R.id.button_wtext: {
                 iface.writeText(wtextEditText.getText().toString());
                 //animateFragment.stopAnimation();
                 //  iface = new InterfaceUI(getActivity());
