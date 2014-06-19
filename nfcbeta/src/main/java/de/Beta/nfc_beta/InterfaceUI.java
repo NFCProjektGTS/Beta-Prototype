@@ -49,21 +49,23 @@ public class InterfaceUI {
             framework.enableWrite();
             printDebugInfo("Schreibe Stummschalten");
         } else {
-            showToast("Unable to use NFC");
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
     public void writeKontakt(String payload) {
         if (framework != null && framework.isEnabled()) {
             framework.setPayload(payload);
-            if (!framework.getPayload().equals("")) {
+            if (!framework.getPayload().equals("") || framework.getPayload() != null) {
                 framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
                 framework.enableWrite();
+            } else {
+                showToast("Kein Kontakt gewählt!");
             }
             //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
             printDebugInfo("Schreibe Kontakt");
         } else {
-            showToast("Unable to use NFC");
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
@@ -77,7 +79,7 @@ public class InterfaceUI {
                 framework.createWriteNdef(NdefCreator.ImageMessage(pictureFileName));
                 framework.enableWrite();
             } else {
-                showToast("Unable to use NFC");
+                showToast("NFC Dienst nicht nutzbar");
             }
         }
     }
@@ -88,7 +90,7 @@ public class InterfaceUI {
                 framework.createWriteNdef(NdefCreator.SoundMessage(soundFileName));
                 framework.enableWrite();
             } else {
-                showToast("Unable to use NFC");
+                showToast("NFC Dienst nicht nutzbar");
             }
         }
     }
@@ -102,7 +104,7 @@ public class InterfaceUI {
                 framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
                 framework.enableWrite();
             } else {
-                showToast("Unable to use NFC");
+                showToast("NFC Dienst nicht nutzbar");
             }
         }
     }
@@ -121,7 +123,7 @@ public class InterfaceUI {
                 printDebugError("URL: " + s + " malformed!");
             }
         } else {
-            showToast("Unable to use NFC");
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
