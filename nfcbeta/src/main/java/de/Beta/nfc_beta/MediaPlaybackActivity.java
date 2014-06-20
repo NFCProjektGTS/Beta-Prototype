@@ -34,9 +34,7 @@ public class MediaPlaybackActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_showsound);
         Intent i = getIntent();
-
         String file = i.getStringExtra(SoundFragment.MESSAGE);
-
         Init(file);
         seekUpdation();
     }

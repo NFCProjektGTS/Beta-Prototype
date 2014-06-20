@@ -277,6 +277,7 @@ public class NFCFramework {
                 this.WriteMode = true;
                 wai.printDebugInfo("Writemode enabled");
                 wai.printDebugInfo("Please scan a NFC Tag to write on");
+
                 MainActivity.dialogAnimation = new AlertDialogAnimation(caller, AlertDialog.THEME_HOLO_DARK);
                 MainActivity.dialogAnimation.loadNFCAnimation();
                 MainActivity.dialogAnimation.startAnimation();

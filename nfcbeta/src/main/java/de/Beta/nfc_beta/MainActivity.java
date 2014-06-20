@@ -1,5 +1,6 @@
 package de.Beta.nfc_beta;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
@@ -24,8 +25,7 @@ public class MainActivity extends ActionBarActivity
     public static final int RQS_PICK_CONTACT = 2;
     //public static final int RQS_PICK_SOUND = 3;
     //public static final int RQS_PICK_IMAGE = 4;
-
-
+    public static final String MESSAGE = "de.Beta.nfc_beta.FILEMESSAGE";
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity
     public static FragmentManager fragmentManager;
     public static Sound sound;
     public static AlertDialogAnimation dialogAnimation;
+    private static Context context;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
@@ -55,9 +56,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     public static void showSoundFragment(String sound) {
-        fragmentManager.beginTransaction()
+        /*fragmentManager.beginTransaction()
                 .replace(R.id.container, SoundFragment.newInstance(sound))
-                .commit();
+                .commit();*/
+        Intent intent = new Intent(context, MediaPlaybackActivity.class);
+        intent.putExtra(MESSAGE, sound);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
 
@@ -100,7 +105,7 @@ public class MainActivity extends ActionBarActivity
         wuf = wURLFragment.newInstance(10);
         iface = new InterfaceUI(this);
         //framework = new NFCFramework(this, iface);
-
+        context = getApplicationContext();
 
     }
 
