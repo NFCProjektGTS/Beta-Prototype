@@ -16,6 +16,7 @@ public class SoundFragment  extends Fragment {
 
     public static final String MESSAGE = "de.Beta.nfc_beta.FILEMESSAGE";
     private static final String SOUND = "section_number";
+    private static String soundpath;
 
     public SoundFragment() {
     }
@@ -23,6 +24,7 @@ public class SoundFragment  extends Fragment {
     public static SoundFragment newInstance(String sound) {
         SoundFragment fragment = new SoundFragment();
         Bundle args = new Bundle();
+        soundpath = sound;
         args.putString(SOUND, sound);
         fragment.setArguments(args);
         return fragment;
@@ -32,7 +34,7 @@ public class SoundFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_showsound, container, false);
         Intent intent = new Intent(getActivity(), MediaPlaybackActivity.class);
-        intent.putExtra(MESSAGE, savedInstanceState.getString(SOUND));
+        intent.putExtra(MESSAGE, soundpath);
         startActivity(intent);
 
         //TODO HIER DAS SOUND ABSPIELEN REIN
