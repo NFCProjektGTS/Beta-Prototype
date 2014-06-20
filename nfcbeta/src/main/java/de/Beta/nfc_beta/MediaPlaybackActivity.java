@@ -3,6 +3,7 @@ package de.Beta.nfc_beta;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -47,8 +48,7 @@ public class MediaPlaybackActivity extends Activity implements OnClickListener {
         text_shown = (TextView) findViewById(R.id.text_shown);
         play_button.setOnClickListener(this);
         pause_button.setOnClickListener(this);
-
-        //Uri path = Uri.parse("file:///android_assets/sounds/door.mp3");
+        Uri path = Uri.parse("file:///android_assets/sounds/" + file);
         player = MediaPlayer.create(this, path);
         seek_bar.setMax(player.getDuration());
     }

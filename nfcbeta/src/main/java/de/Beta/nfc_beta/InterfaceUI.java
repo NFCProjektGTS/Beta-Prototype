@@ -75,23 +75,27 @@ public class InterfaceUI {
 
     public void writePicture(String pictureFileName) {
         if (framework != null && framework.isEnabled()) {
+            printDebugInfo("Picture : " + pictureFileName);
+            framework.setPayload(pictureFileName);
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.ImageMessage(pictureFileName));
                 framework.enableWrite();
-            } else {
-                showToast("NFC Dienst nicht nutzbar");
             }
+        } else {
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
     public void writeSound(String soundFileName) {
         if (framework != null && framework.isEnabled()) {
+            printDebugInfo("Sound : " + soundFileName);
+            framework.setPayload(soundFileName);
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.SoundMessage(soundFileName));
                 framework.enableWrite();
-            } else {
-                showToast("NFC Dienst nicht nutzbar");
             }
+        } else {
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
@@ -103,9 +107,9 @@ public class InterfaceUI {
             if (!framework.getPayload().equals("")) {
                 framework.createWriteNdef(NdefCreator.fromText(framework.getPayload(), "de_DE"));
                 framework.enableWrite();
-            } else {
-                showToast("NFC Dienst nicht nutzbar");
             }
+        } else {
+            showToast("NFC Dienst nicht nutzbar");
         }
     }
 
