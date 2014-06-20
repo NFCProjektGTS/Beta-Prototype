@@ -1,6 +1,7 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -126,7 +127,6 @@ public class NFCFramework {
                 if (wTAG != null && mWriteNdef[0] != null) {
                     int code = writeTag(wTAG, mWriteNdef[0]);
                     wai.printDebugInfo(OnTagWriteListener.onTagWrite(code));
-                    //TODO Close Animation if any open
                     if (MainActivity.dialogAnimation != null) {
                         MainActivity.dialogAnimation.closeDialog();
                     }
@@ -277,6 +277,9 @@ public class NFCFramework {
                 this.WriteMode = true;
                 wai.printDebugInfo("Writemode enabled");
                 wai.printDebugInfo("Please scan a NFC Tag to write on");
+                MainActivity.dialogAnimation = new AlertDialogAnimation(caller, AlertDialog.THEME_HOLO_DARK);
+                MainActivity.dialogAnimation.loadNFCAnimation();
+                MainActivity.dialogAnimation.startAnimation();
             } else {
                 wai.printDebugWarn("No Data specified!");
             }

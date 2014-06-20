@@ -36,7 +36,6 @@ public class MainActivity extends ActionBarActivity
     public static wURLFragment wuf;
     public static FragmentManager fragmentManager;
     public static Sound sound;
-    public static AnimationPopUpWindow popup;
     public static AlertDialogAnimation dialogAnimation;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
@@ -100,11 +99,7 @@ public class MainActivity extends ActionBarActivity
         wtf = wTextFragment.newInstance(9);
         wuf = wURLFragment.newInstance(10);
         iface = new InterfaceUI(this);
-        popup = new AnimationPopUpWindow(this);
         //framework = new NFCFramework(this, iface);
-
-
-
 
 
     }
@@ -190,15 +185,15 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section8);
                 break;
             case 101:
-                mTitle= "Bildanzeige";//für show Picture Fragment, nicht auswählbar von dem Drawer
+                mTitle = "Bildanzeige";//für show Picture Fragment, nicht auswählbar von dem Drawer
                 restoreActionBar();
                 break;
             case 102:
-                mTitle= "Textanzeige";//für show Text Fragment, nicht auswählbar von dem Drawer
+                mTitle = "Textanzeige";//für show Text Fragment, nicht auswählbar von dem Drawer
                 restoreActionBar();
                 break;
             case 103:
-                mTitle= "Soundplayer";//für show Sound Fragment, nicht auswählbar von dem Drawer
+                mTitle = "Soundplayer";//für show Sound Fragment, nicht auswählbar von dem Drawer
                 restoreActionBar();
         }
     }
@@ -209,7 +204,6 @@ public class MainActivity extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
 
     @Override
@@ -236,6 +230,7 @@ public class MainActivity extends ActionBarActivity
         }*/
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -245,6 +240,7 @@ public class MainActivity extends ActionBarActivity
             }
         }
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -253,6 +249,7 @@ public class MainActivity extends ActionBarActivity
             framework.resolveIntent(getIntent());
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -264,6 +261,7 @@ public class MainActivity extends ActionBarActivity
             }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

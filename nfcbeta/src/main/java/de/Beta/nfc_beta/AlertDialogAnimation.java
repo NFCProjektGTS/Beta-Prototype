@@ -23,7 +23,7 @@ public class AlertDialogAnimation extends AlertDialog {
 
         animation = new TranslateAnimation(0, -230, 0, 0);
         animation.setDuration(1800);
-        animation.setRepeatCount(5);
+        animation.setRepeatCount(Integer.MAX_VALUE);
         LayoutInflater inflater = (LayoutInflater) caller.getSystemService(caller.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.dialog_wanimation, null);
         setTitle("NFC Tag beschreiben");

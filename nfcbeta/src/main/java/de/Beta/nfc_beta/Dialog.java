@@ -34,24 +34,6 @@ public class Dialog {
                         .show();
                 break;
             case 1:
-                WritingAnimationFragment animateFragment = new WritingAnimationFragment();
-
-                MainActivity.fragmentManager.beginTransaction()
-                        .replace(R.id.animation_frame, animateFragment)
-
-                        .commit();
-                //animateFragment.loadNfcAnimation();   TODO
-                //animateFragment.startAnimation();     TODO
-                AlertDialog dialog = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK)
-                        .setTitle("NFC Tag beschreiben")
-                                //.setView(mContext.getLayoutInflater().inflate(R.layout.dialog_wanimation, null))
-                        .setCancelable(false)
-                        .show();
-                //animateFragment.startAnimation();
-
-
-                // FrameLayout fl = (FrameLayout) mContext.findViewById(android.R.id.custom);
-                // fl.addView(myView, new FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 
 
                 break;
