@@ -56,13 +56,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     public static void showSoundFragment(String sound) {
-        /*fragmentManager.beginTransaction()
+        fragmentManager.beginTransaction()
                 .replace(R.id.container, SoundFragment.newInstance(sound))
-                .commit();*/
-        Intent intent = new Intent(context, MediaPlaybackActivity.class);
+                .commit();
+        /*Intent intent = new Intent(context, MediaPlaybackActivity.class);
         intent.putExtra(MESSAGE, sound);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        context.startActivity(intent);*/
     }
 
 
