@@ -75,9 +75,9 @@ public class wURLFragment extends Fragment implements View.OnClickListener {
                         .commit();
                 //animateFragment.startAnimation();*/
 
-
-                AlertDialogAnimation dialogAnimation = new AlertDialogAnimation(getActivity(), AlertDialog.THEME_HOLO_DARK);
-                dialogAnimation.startAnimation();
+                MainActivity.dialogAnimation = new AlertDialogAnimation(getActivity(), AlertDialog.THEME_HOLO_DARK);
+                MainActivity.dialogAnimation.loadNFCAnimation();
+                MainActivity.dialogAnimation.startAnimation();
                 break;
             }
         }

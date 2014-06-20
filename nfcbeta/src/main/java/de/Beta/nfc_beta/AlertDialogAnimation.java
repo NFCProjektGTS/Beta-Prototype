@@ -20,25 +20,25 @@ public class AlertDialogAnimation extends AlertDialog {
 
     AlertDialogAnimation(Activity caller, int THEME) {
         super(caller, THEME);
+
         animation = new TranslateAnimation(0, -230, 0, 0);
         animation.setDuration(1800);
         animation.setRepeatCount(5);
-        //view = caller.getLayoutInflater().inflate(R.layout.dialog_wanimation, null);
-
         LayoutInflater inflater = (LayoutInflater) caller.getSystemService(caller.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.dialog_wanimation, null);
-        setContentView(view);
-
         setTitle("NFC Tag beschreiben");
-
         setView(view);
         setCancelable(false);
-        ImageView tag = (ImageView) view.findViewById(R.id.imgViewTag);
-        tag.setVisibility(View.VISIBLE);
-
-        ImageView handy = (ImageView) view.findViewById(R.id.imgViewHandy);
-        handy.setVisibility(View.VISIBLE);
         show();
+        //setContentView(view);
+    }
+
+    public void loadNFCAnimation() {
+        images.clear();
+        ImageView tag = (ImageView) view.findViewById(R.id.imgViewTag);
+        images.add(tag);
+        ImageView handy = (ImageView) view.findViewById(R.id.imgViewHandy);
+        images.add(handy);
     }
 
     public void startAnimation() {
@@ -49,5 +49,11 @@ public class AlertDialogAnimation extends AlertDialog {
         //img.setImageResource(R.drawable.handy);
         //ObjectAnimator animation = ObjectAnimator.ofFloat(img,"x", 200);
         //img.setImageResource(R.drawable.bild_b);
+    }
+
+    public void closeDialog() {
+        animation.cancel();
+        images.clear();
+        this.dismiss();
     }
 }

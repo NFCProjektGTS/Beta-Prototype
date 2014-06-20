@@ -5,32 +5,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgViewHandy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="45dp"
+        android:cropToPadding="false"
         android:src="@drawable/handy"
         android:visibility="invisible" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgViewTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginLeft="66dp"
+        android:layout_alignTop="@+id/imgViewHandy"
+        android:layout_marginRight="63dp"
+        android:layout_toLeftOf="@+id/imgViewHandy"
         android:src="@drawable/nfc_tag"
         android:visibility="invisible" />
 </RelativeLayout>

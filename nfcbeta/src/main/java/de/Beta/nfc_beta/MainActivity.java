@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity
     public static FragmentManager fragmentManager;
     public static Sound sound;
     public static AnimationPopUpWindow popup;
+    public static AlertDialogAnimation dialogAnimation;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
@@ -59,6 +60,7 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, SoundFragment.newInstance(sound))
                 .commit();
     }
+
 
     @Override
     protected void onStop() {

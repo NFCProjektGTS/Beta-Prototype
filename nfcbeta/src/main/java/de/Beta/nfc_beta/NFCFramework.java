@@ -127,7 +127,9 @@ public class NFCFramework {
                     int code = writeTag(wTAG, mWriteNdef[0]);
                     wai.printDebugInfo(OnTagWriteListener.onTagWrite(code));
                     //TODO Close Animation if any open
-
+                    if (MainActivity.dialogAnimation != null) {
+                        MainActivity.dialogAnimation.closeDialog();
+                    }
                 }
             }
         }
@@ -265,6 +267,7 @@ public class NFCFramework {
             wai.printDebugError("Failed to write. Tag unformatable!");
             return OnTagWriteListener.WRITE_ERROR_BAD_FORMAT;
         }
+
     }
 
     public void enableWrite() {
