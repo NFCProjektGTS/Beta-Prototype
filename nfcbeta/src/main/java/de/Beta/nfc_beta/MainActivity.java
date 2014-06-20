@@ -35,7 +35,6 @@ public class MainActivity extends ActionBarActivity
     public static wSoundFragment wsf;
     public static wURLFragment wuf;
     public static FragmentManager fragmentManager;
-    public static Sound sound;
     public static AlertDialogAnimation dialogAnimation;
     private static Context context;
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -95,8 +94,6 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-
-        sound = new Sound(this.getApplicationContext());
         df = new DebugFragment();
         wcf = wContactFragment.newInstance(5);
         wpf = wPictureFragment.newInstance(7);

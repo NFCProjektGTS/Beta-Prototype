@@ -13,8 +13,6 @@ import java.net.URL;
  * Created by Kern on 03.06.2014.
  */
 public class InterfaceUI {
-    private final int ACTIVITY_CHOOSE_FILE = 1;
-    Sound sound = MainActivity.sound;
     Activity mContext;
     NFCFramework framework;
     DebugFragment df = MainActivity.df;

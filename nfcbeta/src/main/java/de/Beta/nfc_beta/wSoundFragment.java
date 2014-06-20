@@ -31,7 +31,6 @@ import java.util.Collections;
 public class wSoundFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
-    Sound sound = MainActivity.sound;
     private ArrayList<String> soundList;
     private ListView listViewSound;
     private String selectedSound;
@@ -57,6 +56,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
         listViewSound.setOnItemClickListener(this);
 
         try {
+            //TODO falsche sounds dabei! FATAL!!
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);

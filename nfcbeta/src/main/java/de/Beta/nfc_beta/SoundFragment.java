@@ -4,7 +4,6 @@ package de.Beta.nfc_beta;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -20,6 +19,7 @@ import java.io.IOException;
 /**
  * Created by Kern on 16.06.2014.
  */
+
 public class SoundFragment extends Fragment implements View.OnClickListener {
 
     public static final String MESSAGE = "de.Beta.nfc_beta.FILEMESSAGE";
@@ -56,10 +56,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_showsound, container, false);
         Init(soundpath);
-        //TODO HIER DAS SOUND ABSPIELEN REIN
-        //BSP: so würde es mit text gehen, aber hier kommt das Sound abspielen rein
-        //tagcontentView   = (TextView)rootView.findViewById(R.id.textView_TextTagContent);
-        //tagcontentView.setText("Auf dem Tag befindet sich der Text: "+getArguments().getString(TEXT));
         return view;
     }
 
@@ -87,9 +83,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
         text_shown = (TextView) view.findViewById(R.id.text_shown);
         play_button.setOnClickListener(this);
         pause_button.setOnClickListener(this);
-
-        Uri path = Uri.parse("file:///android_assets/sounds/" + file); //file:///android_assets/sounds/door.mp3
-
         AssetFileDescriptor afd;
         try {
             afd = getActivity().getAssets().openFd("sounds/" + file);

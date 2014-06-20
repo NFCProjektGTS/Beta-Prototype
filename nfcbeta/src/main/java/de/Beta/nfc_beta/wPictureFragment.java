@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public  class wPictureFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
+public class wPictureFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     static InterfaceUI iface;
@@ -51,7 +51,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
         View rootView = inflater.inflate(R.layout.fragment_wpicture, container, false);
 
 
-        Button wPictureButton =(Button) rootView.findViewById(R.id.button_wPicture);
+        Button wPictureButton = (Button) rootView.findViewById(R.id.button_wPicture);
         wPictureButton.setOnClickListener(this);
 
         listViewPictures = (ListView) rootView.findViewById(R.id.listView_pictures);
@@ -61,16 +61,16 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
             String[] imageFilenamesNames = getActivity().getApplicationContext().getAssets().list("pictures");
             String[] imageNames = new String[imageFilenamesNames.length];
 
-            for (int i =0; i<imageNames.length;i++){
-                imageNames[i]=imageFilenamesNames[i].replace(".jpg","");
+            for (int i = 0; i < imageNames.length; i++) {
+                imageNames[i] = imageFilenamesNames[i].replace(".jpg", "");
             }
             imageList = new ArrayList<String>();
             imagefilenameList = new ArrayList<String>();
-            Collections.addAll(imagefilenameList,imageFilenamesNames);
+            Collections.addAll(imagefilenameList, imageFilenamesNames);
             Collections.addAll(imageList, imageNames);
 
 
-            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist,this.imageList);
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist, this.imageList);
             listViewPictures.setAdapter(listAdapter);
 
             selectedPictureViewer = (ImageView) rootView.findViewById(R.id.imageView_selectedPicture);
@@ -89,14 +89,14 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
                 getArguments().getInt(ARG_SECTION_NUMBER));
         iface = MainActivity.iface;
     }
+
     @Override
     public void onClick(View view) {
         //iface = new InterfaceUI(getActivity());
         switch (view.getId()) {
-            case  R.id.button_wPicture: {
-                if(selectedPicture!=null){
+            case R.id.button_wPicture: {
+                if (selectedPicture != null) {
                     iface.writePicture(selectedPicture);
-                    //TODO animation when list is hidden
                 } else {
                     iface.showToast("Kein Bild ausgewählt!");
                 }
@@ -110,7 +110,7 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         switch (parent.getId()) {
-            case R.id.listView_pictures:{
+            case R.id.listView_pictures: {
                 selectedPicture = imagefilenameList.get(position);
                 showSelectedPicture();
 
@@ -118,14 +118,13 @@ public  class wPictureFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void showSelectedPicture(){
-        if(selectedPicture!=null){
-            try{
-                InputStream iS = getActivity().getAssets().open("pictures/"+selectedPicture);
-                Drawable d = Drawable.createFromStream(iS,null);
+    private void showSelectedPicture() {
+        if (selectedPicture != null) {
+            try {
+                InputStream iS = getActivity().getAssets().open("pictures/" + selectedPicture);
+                Drawable d = Drawable.createFromStream(iS, null);
                 selectedPictureViewer.setImageDrawable(d);
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
