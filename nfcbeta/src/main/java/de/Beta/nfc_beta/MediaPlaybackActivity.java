@@ -48,7 +48,7 @@ public class MediaPlaybackActivity extends Activity implements OnClickListener {
         text_shown = (TextView) findViewById(R.id.text_shown);
         play_button.setOnClickListener(this);
         pause_button.setOnClickListener(this);
-        Uri path = Uri.parse("file:///android_assets/sounds/" + file);
+        Uri path = Uri.parse("file:///android_assets/sounds/" + file); //file:///android_assets/sounds/door.mp3
         player = MediaPlayer.create(this, path);
         seek_bar.setMax(player.getDuration());
     }
