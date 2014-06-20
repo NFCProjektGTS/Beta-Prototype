@@ -1,8 +1,8 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -17,6 +17,13 @@ public class MediaPlaybackActivity extends Activity implements OnClickListener {
     MediaPlayer player;
     TextView text_shown;
     Handler seekHandler = new Handler();
+    Runnable run = new Runnable() {
+
+        @Override
+        public void run() {
+            seekUpdation();
+        }
+    };
 
     /**
      * Called when the activity is first created.
@@ -25,31 +32,26 @@ public class MediaPlaybackActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_showsound);
+        Intent i = getIntent();
 
-        getInit();
+        String file = i.getStringExtra(SoundFragment.MESSAGE);
+
+        Init(file);
         seekUpdation();
     }
 
-    public void getInit() {
+    public void Init(String file) {
         seek_bar = (SeekBar) findViewById(R.id.seek_bar);
         play_button = (Button) findViewById(R.id.play_button);
         pause_button = (Button) findViewById(R.id.pause_button);
         text_shown = (TextView) findViewById(R.id.text_shown);
         play_button.setOnClickListener(this);
         pause_button.setOnClickListener(this);
-        Uri path = Uri.parse("file:///android_assets/sounds/door.mp3");
+
+        //Uri path = Uri.parse("file:///android_assets/sounds/door.mp3");
         player = MediaPlayer.create(this, path);
         seek_bar.setMax(player.getDuration());
-
     }
-
-    Runnable run = new Runnable() {
-
-        @Override
-        public void run() {
-            seekUpdation();
-        }
-    };
 
     public void seekUpdation() {
 

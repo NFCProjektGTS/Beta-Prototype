@@ -2,6 +2,7 @@
 package de.Beta.nfc_beta;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
  */
 public class SoundFragment  extends Fragment {
 
+    public static final String MESSAGE = "de.Beta.nfc_beta.FILEMESSAGE";
     private static final String SOUND = "section_number";
 
     public SoundFragment() {
@@ -29,6 +31,10 @@ public class SoundFragment  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_showsound, container, false);
+        Intent intent = new Intent(getActivity(), MediaPlaybackActivity.class);
+        intent.putExtra(MESSAGE, savedInstanceState.getString(SOUND));
+        startActivity(intent);
+
         //TODO HIER DAS SOUND ABSPIELEN REIN
         //BSP: so würde es mit text gehen, aber hier kommt das Sound abspielen rein
         //tagcontentView   = (TextView)rootView.findViewById(R.id.textView_TextTagContent);

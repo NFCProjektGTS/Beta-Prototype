@@ -20,16 +20,20 @@ public class WritingAnimationFragment extends Fragment {
     private Animation animation;
     private ArrayList<ImageView> images = new ArrayList<ImageView>();
 
-    public WritingAnimationFragment(){
+    public WritingAnimationFragment() {
         animation = new TranslateAnimation(0, -230, 0, 0);
         animation.setDuration(1800);
         animation.setRepeatCount(5);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_writing_animation, container, false);
+        loadNfcAnimation(rootView);
+
         return rootView;
     }
 
@@ -39,14 +43,15 @@ public class WritingAnimationFragment extends Fragment {
 
     }
 
-    public void loadNfcAnimation() {
+    public void loadNfcAnimation(View view) {
         images.clear();
-        images.add((ImageView) this.getView().findViewById(R.id.imgViewTag));       //load Tag image into array list
-        images.add((ImageView) this.getView().findViewById(R.id.imgViewHandy));     //load Handy image into array list
+        images.add((ImageView) view.findViewById(R.id.imgViewTag));       //load Tag image into array list
+        images.add((ImageView) view.findViewById(R.id.imgViewHandy));
+        //load Handy image into array list
     }
 
 
-    public void startAnimation(){
+    public void startAnimation() {
         images.get(0).setVisibility(View.VISIBLE);
         images.get(1).setVisibility(View.VISIBLE);
         images.get(1).startAnimation(animation);
@@ -56,7 +61,7 @@ public class WritingAnimationFragment extends Fragment {
         //img.setImageResource(R.drawable.bild_b);
     }
 
-    public void stopAnimation(){
+    public void stopAnimation() {
         animation.cancel();
     }
 

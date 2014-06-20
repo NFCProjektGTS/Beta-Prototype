@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity
     //public static final int RQS_PICK_SOUND = 3;
     //public static final int RQS_PICK_IMAGE = 4;
 
+
     public static NFCFramework framework;
     public static InterfaceUI iface;
     public static DebugFragment df;
@@ -55,7 +56,7 @@ public class MainActivity extends ActionBarActivity
 
     public static void showSoundFragment(String sound) {
         fragmentManager.beginTransaction()
-                .replace(R.id.container, TextFragment.newInstance(sound))
+                .replace(R.id.container, SoundFragment.newInstance(sound))
                 .commit();
     }
 

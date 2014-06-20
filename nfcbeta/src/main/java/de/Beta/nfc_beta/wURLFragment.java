@@ -5,6 +5,7 @@ package de.Beta.nfc_beta;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,9 +55,24 @@ public class wURLFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_wURL: {
-                MainActivity.popup.show();
+                //MainActivity.popup.show();
                 iface.writeURL(wurlEditText.getText().toString());
-                new Dialog(getActivity(),1);
+                //new Dialog(getActivity(),1);
+                WritingAnimationFragment animateFragment = new WritingAnimationFragment();
+                //animateFragment.loadNfcAnimation();   TODO
+                //animateFragment.startAnimation();     TODO
+
+                AlertDialog dialog = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK)
+                        .setTitle("NFC Tag beschreiben")
+                        .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_wanimation, null))
+                        .setCancelable(false)
+                        .show();
+
+                MainActivity.fragmentManager.beginTransaction()
+                        .replace(R.id.animation_frame, animateFragment)
+                        .commit();
+                //animateFragment.startAnimation();
+
                 break;
             }
         }
