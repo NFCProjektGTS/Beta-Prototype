@@ -29,6 +29,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+        <activity
+            android:name=".MediaPlaybackActivity"
+            android:label="Mediaplayback"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
