@@ -18,6 +18,7 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 
 /**
@@ -60,6 +61,15 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);
+
+            Iterator<String> stringIterator = soundList.iterator();
+            while (stringIterator.hasNext()) {
+                String string = stringIterator.next();
+                if (!string.matches("([^\\s]+(\\.(?i)(mp3|wav|ogg|wma))$)")) {
+                    stringIterator.remove();
+                }
+            }
+
             ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist, soundList);
             listViewSound.setAdapter(listAdapter);
         } catch (IOException e) {

@@ -306,7 +306,7 @@ public class NFCFramework {
                         wai.showToast("Mute Tag detected! Toggle Audiostate.");
                         break;
                     case 1002:
-                        //automatically handled in android os
+                        //Process load contact
                         break;
                     case 1003:
                         Operations.initSound(rec);
@@ -317,7 +317,7 @@ public class NFCFramework {
                         wai.showToast("Image Tag detected! Display Image.");
                         break;
                     case 1005:
-                        //placeholder
+                        //GPS Data
                         break;
                     case 1006:
                         Operations.initText(rec);
@@ -335,7 +335,6 @@ public class NFCFramework {
         NdefMessage[] temp = {message};
         this.mWriteNdef = temp;
     }
-
     public void createWriteNdef(NdefMessage[] messages) {
         this.mWriteNdef = messages;
     }

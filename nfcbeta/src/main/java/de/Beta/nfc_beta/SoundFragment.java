@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,22 +22,18 @@ import java.io.IOException;
 
 public class SoundFragment extends Fragment implements View.OnClickListener {
 
-    public static final String MESSAGE = "de.Beta.nfc_beta.FILEMESSAGE";
     private static final String SOUND = "section_number";
     private static String soundpath;
     private View view;
     private SeekBar seek_bar;
     private Button play_button, pause_button;
     private MediaPlayer player;
-    private TextView text_shown;
-    private Handler seekHandler = new Handler();
-    private Runnable run = new Runnable() {
-
-        @Override
+    private Thread seekthread = new Thread(new Runnable() {
         public void run() {
-            seekUpdation();
+            seekbarupdate();
         }
-    };
+    });
+    private TextView text_shown;
 
     public SoundFragment() {
     }
@@ -48,7 +44,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
         soundpath = sound;
         args.putString(SOUND, sound);
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -56,6 +51,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_showsound, container, false);
         Init(soundpath);
+        seekthread.start();
         return view;
     }
 
@@ -68,12 +64,27 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
+        player.stop();
+        player.reset();
+        player.release();
+        player = null;
     }
 
+    private void seekbarupdate() {
+        while (player != null && player.getCurrentPosition() < player.getDuration()) {
+            {
+                seek_bar.setProgress(player.getCurrentPosition());
+                Message msg = new Message();
+                int millis = player.getCurrentPosition();
+                msg.obj = millis / 1000;
 
-    public void seekUpdation() {
-        seek_bar.setProgress(player.getCurrentPosition());
-        seekHandler.postDelayed(run, 1000);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void Init(String file) {
@@ -89,12 +100,28 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
             player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             player.prepare();
-            player.setLooping(true);
             //player = MediaPlayer.create(this, path);
             seek_bar.setMax(player.getDuration());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                if (!fromUser) return;
+                player.seekTo(progress);
+            }
+        });
     }
 
     public void onClick(View view) {
