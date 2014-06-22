@@ -60,7 +60,6 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
         listViewSound.setOnItemClickListener(this);
 
         try {
-            //TODO falsche sounds dabei! FATAL!!
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);
