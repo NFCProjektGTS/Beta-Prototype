@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import static android.media.MediaPlayer.OnPreparedListener;
+
 /**
  * Created by Kern on 16.06.2014.
  */
@@ -34,9 +36,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
         }
     });
     private TextView text_shown;
-
-    public SoundFragment() {
-    }
+    private boolean toggleplay = false;
+    private boolean ready = false;
 
     public static SoundFragment newInstance(String sound) {
         SoundFragment fragment = new SoundFragment();
@@ -48,10 +49,35 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_showsound, container, false);
         Init(soundpath);
-        seekthread.start();
+
         return view;
     }
 
@@ -90,14 +116,29 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     public void Init(String file) {
         seek_bar = (SeekBar) view.findViewById(R.id.seek_bar);
         play_button = (Button) view.findViewById(R.id.play_button);
-        pause_button = (Button) view.findViewById(R.id.pause_button);
+        pause_button = (Button) view.findViewById(R.id.replay_button);
         text_shown = (TextView) view.findViewById(R.id.text_shown);
         play_button.setOnClickListener(this);
         pause_button.setOnClickListener(this);
         AssetFileDescriptor afd;
+        player = new MediaPlayer();
+        player.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                ready = true;
+                seekthread.start();
+            }
+        });
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                play_button.setText("Play");
+                toggleplay = !toggleplay;
+            }
+        });
         try {
             afd = getActivity().getAssets().openFd("sounds/" + file);
-            player = new MediaPlayer();
+
             player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             player.prepare();
             //player = MediaPlayer.create(this, path);
@@ -125,18 +166,29 @@ public class SoundFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
+        if(ready){
+            switch (view.getId()) {
             case R.id.play_button:
-                text_shown.setText("Playing...");
-                player.start();
+                if (!toggleplay) {
+                    text_shown.setText("Playing: " + soundpath);
+                    player.start();
+                    play_button.setText("Pause");
+                    toggleplay = !toggleplay;
+                } else {
+                    text_shown.setText("Paused: " + soundpath);
+                    player.pause();
+                    play_button.setText("Play");
+                    toggleplay = !toggleplay;
+                }
                 break;
-            case R.id.pause_button:
+            case R.id.replay_button:
                 player.pause();
-                text_shown.setText("Paused...");
+                player.seekTo(1);
+                play_button.setText("Play");
+                toggleplay = false;
         }
-
     }
-
+    }
 }
 
 

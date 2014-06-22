@@ -72,6 +72,7 @@ public class InterfaceUI {
     }
 
     public void writePicture(String pictureFileName) {
+        MainActivity.showPictureFragment(pictureFileName);
         if (framework != null && framework.isEnabled()) {
             printDebugInfo("Picture : " + pictureFileName);
             framework.setPayload(pictureFileName);
