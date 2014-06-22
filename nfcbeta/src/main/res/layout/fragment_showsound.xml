@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120px"
+        android:layout_marginTop="100px"
         android:text=""
         android:textSize="30px" />
 
@@ -20,21 +20,20 @@
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="120px"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/seek_bar"
         android:layout_marginTop="60px"
         android:gravity="center"
-        android:text="Play"
-        android:singleLine="false" />
+        android:text="Play" />
 
     <Button
         android:id="@+id/replay_button"
-        android:layout_width="120px"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/seek_bar"
         android:layout_marginTop="60px"
-        android:text="Replay" />
+        android:text="Pause" />
 
 </RelativeLayout>

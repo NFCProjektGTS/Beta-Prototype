@@ -86,8 +86,7 @@ public class InterfaceUI {
     }
 
     public void writeSound(String soundFileName) {
-        //DEBUG
-        MainActivity.showSoundFragment(soundFileName);
+
         if (framework != null && framework.isEnabled()) {
             printDebugInfo("Sound : " + soundFileName);
             framework.setPayload(soundFileName);
