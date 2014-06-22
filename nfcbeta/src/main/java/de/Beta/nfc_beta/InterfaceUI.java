@@ -57,8 +57,6 @@ public class InterfaceUI {
             if (!framework.getPayload().equals("") || framework.getPayload() != null) {
                 framework.createWriteNdef(NdefCreator.vCard(framework.getPayload()));
                 framework.enableWrite();
-            } else {
-                showToast("Kein Kontakt gewählt!");
             }
             //mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 1);
             printDebugInfo("Schreibe Kontakt");
