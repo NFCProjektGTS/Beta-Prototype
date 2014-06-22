@@ -15,12 +15,15 @@ import java.io.InputStream;
 /**
  * Created by Kern on 16.06.2014.
  */
-public class PictureFragment  extends Fragment {
+public class PictureFragment extends Fragment {
 
     private static final String PICTURE = "section_number";
-    private ImageView TagPictureViewer;
     private static PictureFragment pFragment;
+    private ImageView TagPictureViewer;
 
+
+    public PictureFragment() {
+    }
 
     public static PictureFragment newInstance(String picture) {
         PictureFragment fragment = new PictureFragment();
@@ -33,17 +36,14 @@ public class PictureFragment  extends Fragment {
 
     }
 
-    public PictureFragment() {
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_showpicture, container, false);
         TagPictureViewer = (ImageView) rootView.findViewById(R.id.imageView_TagPicture);
         InputStream ims = null;
         System.out.println(getArguments().getString(PICTURE));
         try {
-            ims = getActivity().getAssets().open("pictures/"+getArguments().getString(PICTURE));
+            ims = getActivity().getAssets().open("pictures/" + getArguments().getString(PICTURE));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,13 +53,10 @@ public class PictureFragment  extends Fragment {
         return rootView;
     }
 
-
-
-
-
     @Override
     public void onAttach(Activity activity) {
-        super.onAttach(activity);((MainActivity)activity).onSectionAttached(101);//SWITCH CASE FÜR PICTURE
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(101);//SWITCH CASE FÜR PICTURE
     }
 
 }

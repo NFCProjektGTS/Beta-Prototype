@@ -13,9 +13,9 @@ import java.net.URL;
  * Created by Kern on 03.06.2014.
  */
 public class InterfaceUI {
-    Activity mContext;
-    NFCFramework framework;
-    DebugFragment df = MainActivity.df;
+    private Activity mContext;
+    private NFCFramework framework;
+    private DebugFragment df = MainActivity.df;
 
     InterfaceUI(Activity c) {
         mContext = c;
@@ -67,12 +67,7 @@ public class InterfaceUI {
         }
     }
 
-    public void activateNFC() {
-        mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
-    }
-
     public void writePicture(String pictureFileName) {
-        MainActivity.showPictureFragment(pictureFileName);
         if (framework != null && framework.isEnabled()) {
             printDebugInfo("Picture : " + pictureFileName);
             framework.setPayload(pictureFileName);
@@ -86,7 +81,6 @@ public class InterfaceUI {
     }
 
     public void writeSound(String soundFileName) {
-
         if (framework != null && framework.isEnabled()) {
             printDebugInfo("Sound : " + soundFileName);
             framework.setPayload(soundFileName);
@@ -133,6 +127,11 @@ public class InterfaceUI {
 
     public void chooseContact() {
         mContext.startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE), 2); //2 == RQS_PICK_CONTACT
+    }
+
+
+    public void activateNFC() {
+        mContext.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
     }
 
 

@@ -26,12 +26,13 @@ import java.util.Collections;
 public class wPictureFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
+    private static InterfaceUI iface;
     private ArrayList<String> imageList;
     private ArrayList<String> imagefilenameList;
     private ListView listViewPictures;
     private String selectedPicture;
     private ImageView selectedPictureViewer;
+    private Button wPictureButton;
 
 
     public wPictureFragment() {
@@ -51,8 +52,9 @@ public class wPictureFragment extends Fragment implements View.OnClickListener, 
         View rootView = inflater.inflate(R.layout.fragment_wpicture, container, false);
 
 
-        Button wPictureButton = (Button) rootView.findViewById(R.id.button_wPicture);
+        wPictureButton = (Button) rootView.findViewById(R.id.button_wPicture);
         wPictureButton.setOnClickListener(this);
+        wPictureButton.setEnabled(false);
 
         listViewPictures = (ListView) rootView.findViewById(R.id.listView_pictures);
         listViewPictures.setOnItemClickListener(this);
@@ -111,7 +113,9 @@ public class wPictureFragment extends Fragment implements View.OnClickListener, 
 
         switch (parent.getId()) {
             case R.id.listView_pictures: {
+                wPictureButton.setEnabled(true);
                 selectedPicture = imagefilenameList.get(position);
+                iface.showToast("Bild ausgewählt: " + selectedPicture);
                 showSelectedPicture();
 
             }

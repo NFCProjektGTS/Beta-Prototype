@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by Noli on 20.06.2014.
  */
 public class AlertDialogAnimation extends AlertDialog {
-    Animation animation;
+    private Animation animation;
     private ArrayList<ImageView> images = new ArrayList<ImageView>();
     private View view;
 

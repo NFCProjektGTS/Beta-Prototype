@@ -22,16 +22,17 @@ import android.widget.TextView;
 public  class TextFragment extends Fragment {
 
     private static final String TEXT = "section_number";
-    TextView tagcontentView;
+    private TextView tagcontentView;
+
+    public TextFragment() {
+    }
+
     public static TextFragment newInstance(String text) {
         TextFragment fragment = new TextFragment();
         Bundle args = new Bundle();
         args.putString(TEXT, text);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public TextFragment() {
     }
 
     @Override

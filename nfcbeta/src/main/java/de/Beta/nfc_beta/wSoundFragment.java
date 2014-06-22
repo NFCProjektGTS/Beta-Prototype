@@ -31,10 +31,12 @@ import java.util.Iterator;
  */
 public class wSoundFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
+    private static InterfaceUI iface;
     private ArrayList<String> soundList;
     private ListView listViewSound;
+    private ArrayList<String> fileList;
     private String selectedSound;
+    private Button wSoundButton;
 
     public wSoundFragment() {
     }
@@ -51,8 +53,9 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wsound, container, false);
-        Button wSoundButton = (Button) rootView.findViewById(R.id.button_wSound);
+        wSoundButton = (Button) rootView.findViewById(R.id.button_wSound);
         wSoundButton.setOnClickListener(this);
+        wSoundButton.setEnabled(false);
         listViewSound = (ListView) rootView.findViewById(R.id.listView_sound);
         listViewSound.setOnItemClickListener(this);
 
@@ -61,7 +64,6 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
             String[] soundNames = getActivity().getApplicationContext().getAssets().list("sounds");
             soundList = new ArrayList<String>();
             Collections.addAll(soundList, soundNames);
-
             Iterator<String> stringIterator = soundList.iterator();
             while (stringIterator.hasNext()) {
                 String string = stringIterator.next();
@@ -69,7 +71,16 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
                     stringIterator.remove();
                 }
             }
-
+            fileList = new ArrayList<String>(soundList);
+            for (String s : soundList) {
+                if (s.matches("([^\\s]+(\\.(?i)(mp3|wav|ogg|wma))$)")) {
+                    int i = soundList.indexOf(s);
+                    soundList.set(i, s.replace(".wav", ""));
+                    soundList.set(i, s.replace(".ogg", ""));
+                    soundList.set(i, s.replace(".wma", ""));
+                    soundList.set(i, s.replace(".mp3", ""));
+                }
+            }
             ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.assetlist, soundList);
             listViewSound.setAdapter(listAdapter);
         } catch (IOException e) {
@@ -105,7 +116,9 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedSound = soundList.get(i);
+        wSoundButton.setEnabled(true);
+        selectedSound = fileList.get(i);
+        iface.showToast("Sound ausgewhählt: " + selectedSound);
         //sound.soundAbspielen(soundList.get(i));
         //sound.soundAbspielen("door.mp3");
     }

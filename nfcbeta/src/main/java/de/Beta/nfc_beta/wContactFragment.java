@@ -20,10 +20,10 @@ public  class wContactFragment extends Fragment implements View.OnClickListener 
 
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
-    TextView TextViewContactName;
-    TextView TextViewContactPhone;
-    String contactPayload;
+    private static InterfaceUI iface;
+    private TextView TextViewContactName;
+    private TextView TextViewContactPhone;
+    private String contactPayload;
 
     public wContactFragment() {
     }

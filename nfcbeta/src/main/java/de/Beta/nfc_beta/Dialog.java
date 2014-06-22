@@ -10,7 +10,7 @@ import android.content.DialogInterface;
  */
 
 public class Dialog {
-    static InterfaceUI iface;
+    private static InterfaceUI iface;
 
     Dialog(final Activity mContext, int id) {
         iface = MainActivity.iface;

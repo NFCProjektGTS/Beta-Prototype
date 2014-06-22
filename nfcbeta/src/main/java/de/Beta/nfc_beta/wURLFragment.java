@@ -17,8 +17,8 @@ import android.widget.EditText;
 public class wURLFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
-    EditText wurlEditText;
+    private static InterfaceUI iface;
+    private EditText wurlEditText;
 
     public wURLFragment() {
     }

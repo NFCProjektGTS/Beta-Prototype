@@ -20,7 +20,7 @@ import android.widget.Button;
 public  class wMuteFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    static InterfaceUI iface;
+    private static InterfaceUI iface;
 
     public wMuteFragment() {
 
