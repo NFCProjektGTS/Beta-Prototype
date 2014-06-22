@@ -20,8 +20,8 @@
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="120px"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/seek_bar"
         android:layout_marginTop="60px"
         android:gravity="center"
@@ -29,8 +29,8 @@
 
     <Button
         android:id="@+id/pause_button"
-        android:layout_width="120px"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/seek_bar"
         android:layout_marginTop="60px"

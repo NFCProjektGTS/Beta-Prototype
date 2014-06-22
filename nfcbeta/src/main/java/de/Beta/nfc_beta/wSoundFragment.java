@@ -105,7 +105,7 @@ public class wSoundFragment extends Fragment implements View.OnClickListener, Li
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedSound = soundList.get(i); //TODO this just worked
+        selectedSound = soundList.get(i);
         //sound.soundAbspielen(soundList.get(i));
         //sound.soundAbspielen("door.mp3");
     }
