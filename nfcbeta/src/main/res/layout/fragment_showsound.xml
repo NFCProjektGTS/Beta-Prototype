@@ -34,6 +34,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/seek_bar"
         android:layout_marginTop="60px"
-        android:text="Pause" />
+        android:text="Reset" />
 
 </RelativeLayout>
